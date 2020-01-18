@@ -2,7 +2,43 @@
 
 A macOS development environment setup guide and installation scripts.
 
-![Release-macOS-doc][release-macos-shield] ![License][license-shield] [![Twitter][twitter-shield]](https://twitter.com/mgomesborges)
+![Release-macOS-doc][release-macos-shield] [![License][license-shield]](LICENSE.md) [![Twitter][twitter-shield]](https://twitter.com/mgomesborges)
+
+## Command Line Tools (mandatory)
+
+![Command Line Tools](./assets/terminal.png?raw=true)
+
+The Command Line Tools Package is a small self-contained package available for download separately from Xcode and that allows you to do command line development in macOS.
+
+### Install Command Line Tools
+
+1. Paste that in the terminal prompt:
+
+    ```bash
+    xcode-select --install
+    ```
+
+2. A software update popup window will appear. Click `Install`, then agree to the Terms of Service when requested.
+
+    ![Command Line Tools](./assets/Xcode-command-line-tools.png)
+
+3. The Command Line Tools is installed at:
+
+    ```bash
+    /Library/Developer/CommandLineTools/
+    ```
+
+## Xcode (optional)
+
+![Xcode](./assets/Xcode.png)
+
+[Xcode](https://developer.apple.com/xcode/) is Apple's integrated development environment (IDE) for Swift, Objective-C, C, and C++. It also supports Java, AppleScript, Python, Ruby, and ResEdit (Rez).
+
+### Install Xcode
+
+> :red_circle: WARNING: Xcode takes over 13 GB of disk space. Its installation is not mandatory.
+
+Download and install Xcode from the [App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12) or from [Apple's website](https://developer.apple.com/xcode/)
 
 ## Contributing
 
