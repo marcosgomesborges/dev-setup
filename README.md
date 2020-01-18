@@ -40,6 +40,20 @@ The Command Line Tools Package is a small self-contained package available for d
 
 Download and install Xcode from the [App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12) or from [Apple's website](https://developer.apple.com/xcode/)
 
+## Homebrew (mandatory)
+
+![Homebrew](./assets/homebrew.png?raw=true)
+
+[Homebrew](https://brew.sh) is the missing package manager for macOS.
+
+### Install Homebrewv
+
+Open the terminal and run the following script:
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
 ## Contributing
 
 All contributions are welcome! There are many ways in which you can participate in the project, for example:
