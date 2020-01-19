@@ -36,9 +36,9 @@ The Command Line Tools Package is a small self-contained package available for d
 
 ### Install Xcode
 
-> :red_circle: WARNING: Xcode takes over 13 GB of disk space. Its installation is not mandatory.
-
 Download and install Xcode from the [App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12) or from [Apple's website](https://developer.apple.com/xcode/)
+
+:red_circle: WARNING: Xcode takes over 13 GB of disk space. Its installation is not mandatory.
 
 ## Homebrew (mandatory)
 
@@ -52,6 +52,65 @@ Open the terminal and run the following script:
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+## Git (mandatory)
+
+![Git](./assets/git.png?raw=true)
+
+[Git](https://git-scm.com) is a free and open source distributed version control system.
+
+### Install Git
+
+Run on the terminal:
+
+```bash
+brew install git
+```
+
+### Configure Git
+
+Paste that in the terminal:
+
+```bash
+git_config_global() {
+    printf "\nGit configuration - Ctrl+C to cancel\n"
+
+    printf "\nUser name (example: M Gomes-Borges) : "
+    read -r GIT_USER_NAME
+
+    printf "\nE-mail (example: git@gomes-borges.com): "
+    read -r GIT_USER_EMAIL
+
+    # Set git user name and email
+    git config --global user.name "${GIT_USER_NAME}"
+    git config --global user.email "${GIT_USER_EMAIL}"
+
+    # Set git terminal colors
+    git config --global color.ui true
+    git config --global color.status.changed "blue normal"
+    git config --global color.status.untracked "red normal"
+    git config --global color.status.added "magenta normal"
+    git config --global color.status.updated "green normal"
+    git config --global color.status.branch "yellow normal bold"
+    git config --global color.status.header "white normal bold"
+
+    printf "\nGit setup completed\n"
+}
+
+git_config_global
+```
+
+### Check Git configuration
+
+Check your name and e-mail:
+
+```bash
+git config --global --list
+
+# user.name=Your User Name
+# user.email=your@email.com
+# ...
 ```
 
 ## Contributing
