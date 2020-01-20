@@ -188,6 +188,24 @@ and integrate systems more effectively.
     pyenv virtualenvwrapper
     ```
 
+## Python for Data Science
+
+![Python Package](./assets/python-package.png?raw=true)
+
+[Python set-up guide](./docs/python-setup.md) will help to install Python libraries used by data scientists:
+
+* TensorFlow
+* Keras
+* numpy
+* pandas
+* scipy
+* pillow
+* scikit-learn
+* scikit-image
+* sk-video
+* Matplotlib
+* Jupyter lab & extensions
+
 ## Contributing
 
 All contributions are welcome! There are many ways in which you can participate in the project, for example:
