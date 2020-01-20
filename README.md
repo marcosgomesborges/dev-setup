@@ -113,6 +113,17 @@ git config --global --list
 # ...
 ```
 
+## Terminal
+
+![Zsh](./assets/oh-my-zsh-logo.png?raw=true) ![Bash](./assets/bash-logo.png?raw=true)
+
+With macOS Catalina - October 2019, Apple is now using Zsh as the default shell. However, you can quickly switch back to Bash if you prefer.
+
+Check out how to select your shell and set up your terminal theme:
+
+* [Bash tutorial](./docs/terminal-bash-setup.md)
+* [Zsh tutorial](./docs/terminal-zsh-setup.md)
+
 ## Contributing
 
 All contributions are welcome! There are many ways in which you can participate in the project, for example:
