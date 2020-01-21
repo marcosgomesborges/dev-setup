@@ -206,6 +206,32 @@ and integrate systems more effectively.
 * Matplotlib
 * Jupyter lab & extensions
 
+## LaTeX - MacTeX (optional)
+
+![LaTeX](assets/mactex.png?raw=true)
+
+[MacTeX](https://tug.org/mactex/mactex-download.html) is an install package which installs everything needed to run TeX on Mac OS X.
+
+### Install LaTeX
+
+1. Install Ghostscript
+
+    ```bash
+    brew install ghostscript
+    ```
+
+2. Download MacTeX 2019 from <https://tug.org/mactex/mactex-download.html>
+
+3. Double click on the downloaded file to install
+4. Several pages of information will be displayed
+5. One of the last is shown below. Click on the `Customise` button
+
+    ![MacTex](./assets/mactex-installation01.png?raw=true)
+
+6. Deselect the packages `GUI-Applications` and `Ghostscript`, then click on `Install`
+
+    ![MacTex](./assets/mactex-installation02.png?raw=true)
+
 ## Contributing
 
 All contributions are welcome! There are many ways in which you can participate in the project, for example:
