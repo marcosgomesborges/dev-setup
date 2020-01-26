@@ -38,7 +38,7 @@ The Command Line Tools Package is a small self-contained package available for d
 
 Download and install Xcode from the [App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12) or from [Apple's website](https://developer.apple.com/xcode/)
 
-:red_circle: WARNING: Xcode takes over 13 GB of disk space. Its installation is not mandatory.
+:warning: Xcode takes over 13 GB of disk space. Its installation is not mandatory.
 
 ## Homebrew (mandatory)
 
@@ -131,7 +131,7 @@ Check out how to select your shell and set up your terminal theme:
 [Python](https://www.python.org) is a programming language that lets you work quickly
 and integrate systems more effectively.
 
-### Intall Pyenv
+### Install Pyenv
 
 [Pyenv](https://github.com/pyenv/pyenv) lets you easily switch between multiple versions of Python. It's simple:
 
@@ -206,9 +206,19 @@ and integrate systems more effectively.
 * Matplotlib
 * Jupyter lab & extensions
 
+## Visual Studio Code - VS Code
+
+![VS Code](./assets/vs-code.png?raw=true)
+
+[Visual Studio Code](https://code.visualstudio.com/) is a lightweight but powerful source code editor.
+
+Check out the [VS Code set-up guide](./docs/vs-code.md).
+
+![LaTeX with VSCode](./assets/vs-code-latex.png?raw=true)
+
 ## LaTeX - MacTeX (optional)
 
-![LaTeX](assets/mactex.png?raw=true)
+![LaTeX](./assets/mactex.png?raw=true)
 
 [MacTeX](https://tug.org/mactex/mactex-download.html) is an install package which installs everything needed to run TeX on Mac OS X.
 
