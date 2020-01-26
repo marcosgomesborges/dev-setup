@@ -242,6 +242,38 @@ Check out the [VS Code set-up guide](./docs/vs-code.md).
 
     ![MacTex](./assets/mactex-installation02.png?raw=true)
 
+## Qt
+
+![Qt](./assets/qt.png?raw=true)
+
+[Qt](https://www.qt.io) is a cross-platform application development framework for desktop, embedded and mobile using C++ or Python. Supported Platforms include Linux, OS X, Windows, VxWorks, QNX, Android, iOS, BlackBerry, Sailfish OS and others.
+
+![Qt](./assets/qt-creator.png?raw=true)
+
+### Install Qt
+
+1. Download and run the [Qt online Installer](https://www.qt.io/download-qt-installer)
+2. Click `Next` on the Welcome to the Qt Online installer window
+3. Click `Skip` on the Qt Account window
+4. Accept the Qt Open Source Usage Obligations, and click `Continue`
+5. Click `Continue` no the Setup - Qt window
+6. The installer will complain that Xcode is not installed, just click `OK`
+7. On the Qt Creator User Experience Development window, make your choice and click `Continue`
+8. Click `Continue` on the Installation Folder window
+9. Select the latest Qt version prebuilt components:
+   * [x] `Qt 5.14.0` / `macOS`
+   * [x] `Developer and Designer Tools` / `Qt Installer Framework 3.2`
+10. Then click `Next` and `Install`
+
+### Add Qt Creator into Applications
+
+Paste that in the terminal prompt:
+
+```bash
+# Symbolic link
+ln -s "${HOME}/Qt/Qt Creator.app" "/Applications"
+```
+
 ## Contributing
 
 All contributions are welcome! There are many ways in which you can participate in the project, for example:
