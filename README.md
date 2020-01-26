@@ -274,6 +274,24 @@ Paste that in the terminal prompt:
 ln -s "${HOME}/Qt/Qt Creator.app" "/Applications"
 ```
 
+## FFmpeg
+
+![FFmpeg](./assets/ffmpeg.png?raw=true)
+
+[FFmpeg](https://ffmpeg.org/documentation.html) is a complete, cross-platform solution to record, convert and stream audio and video.
+
+### Install FFmpeg
+
+Run that in the terminal:
+
+```bash
+# Leave Python virtual environment
+deactivate
+
+# Install FFmpeg with all modules
+brew install ffmpeg
+```
+
 ## Contributing
 
 All contributions are welcome! There are many ways in which you can participate in the project, for example:
