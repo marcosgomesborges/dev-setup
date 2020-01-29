@@ -1,0 +1,18 @@
+{
+    "name": "mac-dev-setup",
+    "description": "A Development Environment Setup guide and command-line tool",
+    "author": {
+        "name": "Marcos Gomes-Borges",
+        "email": "git@gomes-borges.com",
+        "url": "http://www.marcosgomesborges.com"
+    },
+    "license": "MIT",
+    "release": "1.0.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mgomesborges/mac-dev-setup"
+    },
+    "bugs": {
+        "url": "https://github.com/mgomesborges/mac-dev-setup/issues"
+    }
+}
