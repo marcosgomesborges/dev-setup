@@ -12,6 +12,12 @@ The standard macOS Terminal appearance is just boring. Apple included a few nice
 
 Below is the Terminal using my personal theme and `.zshrc` configuration. Feel free to copy and use it.
 
+You can set up Zsh following this tutorial or using the mac-dev-setup install script:
+
+```bash
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) zsh
+```
+
 ![macOS Zsh theme](../assets/terminal-zsh.png?raw=true)
 
 ## Update and select Zsh as the default shell
@@ -98,7 +104,7 @@ Clone the repository inside your oh-my-zsh repo:
 
 ```bash
 URL="https://github.com/zsh-users/zsh-completions"
-DIR="${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions"
+DIR="${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions"
 git clone "${URL}" "${DIR}"
 ```
 
@@ -110,7 +116,7 @@ Clone the repository inside your oh-my-zsh repo:
 
 ```bash
 URL="https://github.com/zsh-users/zsh-syntax-highlighting.git"
-DIR="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+DIR="${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 git clone "${URL}" "${DIR}"
 ```
 
