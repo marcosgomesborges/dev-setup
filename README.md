@@ -305,30 +305,34 @@ brew install ffmpeg
 
 [OpenCV](https://opencv.org) (Open Source Computer Vision Library) is an open source computer vision and machine learning software library.
 
+To keep compatibility, use [Python 3.7.6](#install-python).
+
 ### Install OpenCV with Python and Qt support
 
-Use Python 3.7.6 to keep compatibility. Check [how to install Python 3.7.6](#install-python).
-
-1. Create a Python virtual environment with NumPy:
+* Using mac-dev-setup install:
 
     ```bash
-    pyenv shell 3.7.6
-    mkvirtualenv opencv
-    pip install --upgrade pip
-    pip install numpy==1.18.1
-    deactivate
+    bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) opencv
     ```
 
-2. Installing Opencv dependencies
+* Install opencv on your own:
 
     ```bash
+    # Installing Opencv dependencies
     brew install cmake pkg-config ceres-solver eigen ffmpeg glog \
                  harfbuzz jpeg libpng libtiff openexr tbb
     ```
 
-3. Download OpenCV
+    ```bash
+    # Create a Python virtual environment with NumPy 1.18.1
+    pyenv shell 3.7.6
+    mkvirtualenv opencv
+    pip install --upgrade pip
+    pip install numpy==1.18.1
+    ```
 
     ```bash
+    # Download OpenCV
     OPENCV_VERSION="4.2.0"
 
     # Clone OpenCV project from GitHub
@@ -349,10 +353,8 @@ Use Python 3.7.6 to keep compatibility. Check [how to install Python 3.7.6](#ins
     mkdir "${HOME}/opencv/build"
     ```
 
-4. Configure OpenCV
-
     ```bash
-    # Qt PATH
+    # Check Qt PATH
     if ls ${HOME}/Qt*/*/clang_64/bin/qmake 1>/dev/null 2>&1; then
         QT_ON_OFF=ON
     else
@@ -362,7 +364,7 @@ Use Python 3.7.6 to keep compatibility. Check [how to install Python 3.7.6](#ins
     QT_LIB=$(echo ${HOME}/Qt*/*/clang_64/lib/cmake)
     QT_QMAKE=$(echo ${HOME}/Qt*/*/clang_64/bin/qmake)
 
-    # Python PATH
+    # Check Python PATH
     pyenv shell 3.7.6
     workon opencv
     py3_exec=$(which python)
@@ -373,11 +375,11 @@ Use Python 3.7.6 to keep compatibility. Check [how to install Python 3.7.6](#ins
     ```
 
     ```bash
+    # Configure OpenCV via CMake
     cd "${HOME}/opencv/build"
     pyenv shell 3.7.6
     workon opencv
 
-    # Configure OpenCV via CMake
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
           -D CMAKE_INSTALL_PREFIX="/usr/local" \
           -D OPENCV_EXTRA_MODULES_PATH="${HOME}/opencv_contrib/modules" \
@@ -416,9 +418,8 @@ Use Python 3.7.6 to keep compatibility. Check [how to install Python 3.7.6](#ins
           -D CMAKE_CXX_STANDARD=14 ..
     ```
 
-5. Make & make install
-
     ```bash
+    # make opencv
     cd "${HOME}/opencv/build"
     pyenv shell 3.7.6
     workon opencv
@@ -427,6 +428,7 @@ Use Python 3.7.6 to keep compatibility. Check [how to install Python 3.7.6](#ins
     ```
 
     ```bash
+    # make install opencv
     sudo make -j 4 install
     ```
 

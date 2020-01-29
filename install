@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="0.6.0"
+VERSION="0.7.0"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -29,6 +29,7 @@ cat <<EOF
     python376       Install Pyenv and Python 3.7.6
     pypackages      Install Python packages for data science
     vscode          Set up VS Code and install extensions
+    opencv          Install OpenCV with Python and Qt support
 EOF
 }
 
@@ -724,6 +725,134 @@ devsetup_install_code_extensions() {
     printf "${green}" "\nVS Code configured successful.\n"
 }
 
+devsetup_install_opencv() {
+    OPENCV_VERSION="4.2.0"
+
+    printf "${magenta}" "Install OpenCV with Python and Qt support\n"
+
+    printf "${magenta}" "Installing Opencv dependencies\n"
+    brew install cmake pkg-config ceres-solver eigen ffmpeg glog \
+                 harfbuzz jpeg libpng libtiff openexr tbb || true
+
+    printf "${magenta}" "Create a Python virtual environment with NumPy 1.18.1\n"
+    set +u
+    eval "$(pyenv init -)"
+    pyenv global 3.7.6
+    pyenv virtualenvwrapper
+    mkvirtualenv opencv || true
+    set -u
+    pip install --upgrade pip
+    pip install numpy==1.18.1
+
+    printf "${magenta}" "Clone OpenCV project from GitHub\n"
+    git clone https://github.com/opencv/opencv "${HOME}/opencv"
+
+    printf "${magenta}" "Clone OpenCV extra modules from GitHub\n"
+    git clone https://github.com/opencv/opencv_contrib "${HOME}/opencv_contrib"
+
+    printf "${magenta}" "Create a branch from last stable version\n"
+    cd "${HOME}/opencv"
+    git checkout tags/${OPENCV_VERSION} -b ${OPENCV_VERSION}
+
+    printf "${magenta}" "Create a branch from last stable version\n"
+    cd "${HOME}/opencv_contrib"
+    git checkout tags/${OPENCV_VERSION} -b ${OPENCV_VERSION}
+
+    printf "${magenta}" "Create a build directory\n"
+    mkdir "${HOME}/opencv/build"
+
+    printf "${magenta}" "Configure OpenCV\n"
+    # Qt PATH
+    if ls ${HOME}/Qt*/*/clang_64/bin/qmake &>/dev/null; then
+        QT_ON_OFF=ON
+        QT_LIB=$(echo ${HOME}/Qt*/*/clang_64/lib/cmake)
+        QT_QMAKE=$(echo ${HOME}/Qt*/*/clang_64/bin/qmake)
+    else
+        printf "${red}" "Qt installation not found."
+        QT_ON_OFF=OFF
+        QT_LIB=""
+        QT_QMAKE=""
+    fi
+
+    # Python PATH
+    py3_exec=$(which python)
+    py3_config=$(python -c "from distutils.sysconfig import get_config_var as s; print(s('LIBDIR'))")
+    py3_include=$(python -c "import distutils.sysconfig as s; print(s.get_python_inc())")
+    py3_packages=$(python -c "import distutils.sysconfig as s; print(s.get_python_lib())")
+    py3_numpy=$(python -c "import numpy; print(numpy.get_include())")
+
+    cd "${HOME}/opencv/build"
+
+    # Configure OpenCV via CMake
+    cmake -D CMAKE_BUILD_TYPE=RELEASE \
+        -D CMAKE_INSTALL_PREFIX="/usr/local" \
+        -D OPENCV_EXTRA_MODULES_PATH="${HOME}/opencv_contrib/modules" \
+        -D ENABLE_PRECOMPILED_HEADERS=OFF \
+        -D OPENCV_GENERATE_PKGCONFIG=ON \
+        -D WITH_CUDA=OFF \
+        -D WITH_QT="${QT_ON_OFF}" \
+        -D CMAKE_PREFIX_PATH="${QT_LIB}" \
+        -D QT_QMAKE_EXECUTABLE="${QT_QMAKE}" \
+        -D QT5Core_DIR="${QT_LIB}/Qt5Core" \
+        -D QT5Gui_DIR="${QT_LIB}/Qt5Gui" \
+        -D QT5Test_DIR="${QT_LIB}/Qt5Test" \
+        -D QT5Widgets_DIR="${QT_LIB}/Qt5Widgets" \
+        -D Qt5Concurrent_DIR="${QT_LIB}/Qt5Concurrent" \
+        -D OPENCV_ENABLE_NONFREE=ON \
+        -D WITH_GTK=OFF \
+        -D WITH_OPENGL=ON \
+        -D WITH_OPENVX=ON \
+        -D WITH_OPENCL=ON \
+        -D WITH_TBB=ON \
+        -D WITH_EIGEN=ON \
+        -D WITH_GDAL=ON \
+        -D WITH_FFMPEG=ON \
+        -D BUILD_TIFF=ON \
+        -D BUILD_opencv_python2=OFF \
+        -D BUILD_opencv_python3=ON \
+        -D PYTHON_DEFAULT_EXECUTABLE="${py3_exec}" \
+        -D PYTHON3_EXECUTABLE="${py3_exec}" \
+        -D PYTHON3_INCLUDE_DIR="${py3_include}" \
+        -D PYTHON3_PACKAGES_PATH="${py3_packages}" \
+        -D PYTHON3_LIBRARY="${py3_config}" \
+        -D PYTHON3_NUMPY_INCLUDE_DIRS="${py3_numpy}" \
+        -D INSTALL_PYTHON_EXAMPLES=ON \
+        -D INSTALL_C_EXAMPLES=ON \
+        -D BUILD_EXAMPLES=ON \
+        -D CMAKE_CXX_STANDARD=14 ..
+
+    printf "${magenta}" "\nmake opencv\n"
+    wait_for_user
+    make -j 4
+
+    printf "${magenta}" "\nsudo make install opencv\n"
+    wait_for_sudo
+    sudo make -j 4 install
+
+    printf "${magenta}" "\nTest OpenCV installation with Python\n"
+    python -c "import cv2;  print(cv2.__version__)"
+
+    printf "${red}" "\nCaveats: "
+    printf '
+        Symlink OpenCV to a new virtual environment
+        Copy and past the following commands:
+
+        # Activate the TARGET Python virtual environment
+        workon TARGET_ENV
+
+        # Get the OpenCV library path
+        opencv_lib=$(echo ${HOME}/opencv/build/lib/python3/*.so)
+
+        # Get the site-packages path of the virtual environment
+        site_packages=$(python3 -c "import distutils.sysconfig as s; print(s.get_python_lib())")
+
+        # Create a symbolic link to OpenCV library
+        ln -s ${opencv_lib} ${site_packages}
+    '
+
+    printf "${green}" "\nOpenCV installation successful.\n"
+}
+
 # Parse mac-dev-setup options
 while [[ "${#}" -gt 0 ]]; do
     case "${1}" in
@@ -766,6 +895,10 @@ while [[ "${#}" -gt 0 ]]; do
             ;;
         vscode)
             devsetup_install_code_extensions
+            exit 0
+            ;;
+        opencv)
+            devsetup_install_opencv
             exit 0
             ;;
         --|-*|*)
