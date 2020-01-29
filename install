@@ -4,12 +4,14 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="0.1.0"
+VERSION="0.2.0"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
 green="\033[92m%b\033[39m"
 magenta="\033[95m%b\033[39m"
+
+set -euo pipefail
 
 usage() {
 cat <<EOF
@@ -21,6 +23,8 @@ cat <<EOF
 
     git             Install and set up Git
     gitconfig       Set up Git
+    bash            Update and set up Bash as the default shell
+    bashconfig      Improve Bash
 EOF
 }
 
@@ -43,6 +47,26 @@ wait_for_user() {
     fi
 }
 
+wait_for_sudo() {
+    trap "exit 1" SIGINT # Process Interruption Ctrl-C
+
+    # Check if sudo password has been entered
+    # If not, request sudo password
+    if sudo -vn 2>/dev/null; then
+        printf "${magenta}" "\n[sudo] this script is using sudo privileges!\n\n"
+    else
+        printf "\n[sudo] Enter password for ${USER}\n"
+        sudo -v
+    fi
+
+    # Abort if no sudo privileges
+    if ! sudo -vn 2>/dev/null; then
+        printf "${red}" "Aborted: "
+        printf "this script needs sudo privileges!\n"
+        exit 1
+    fi
+}
+
 # Check if Homebrew is installed and update it
 homebrew_update() {
     if command -v brew &>/dev/null; then
@@ -61,7 +85,7 @@ homebrew_update() {
 }
 
 devsetup_git_config() {
-    printf "${magenta}" "\nGit configuration - Ctrl+C to cancel\n"
+    printf "${magenta}" "\nSet up Git - Ctrl+C to cancel\n"
 
     printf "git config --global user.name 'Your name': "
     read -r GIT_USER_NAME
@@ -94,18 +118,163 @@ devsetup_git_config() {
 }
 
 devsetup_install_git() {
+    printf "${magenta}" "Install and set up Git!\n"
+
     homebrew_update
 
     printf "${magenta}" "Installing Git!\n"
-    brew install git
+    brew install git || true
+
     devsetup_git_config
+
     printf "${green}" "\nGit installation successful.\n"
 }
 
+###############################################################################
+set +e
+
+# INPUTRC
+read -r -d '' INPUTRC <<EOF
+"\e[A":history-search-backward
+"\e[B":history-search-forward
+
+set colored-stats on
+set mark-symlinked-directories on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set visible-stats on
+set completion-ignore-case on
+TAB: menu-complete
+EOF
+
+# BASH_PROFILE
+read -r -d '' BASH_PROFILE <<"EOF"
+#!/bin/bash
+# Bash Profile for macOS
+# Copyright (c) Marcos Gomes-Borges
+# https://github.com/mgomesborges/mac-dev-setup
+
+# LS Colors
+# CLICOLOR use ANSI color sequences to distinguish file types
+export CLICOLOR=true
+export LSCOLORS=gxegbxdxcxahadabafacge
+alias ls='ls -GFh'
+
+# Bash Colors and formatting
+CYAN="\[\e[38;5;6m\]"
+MAGENTA="\[\e[38;5;13m\e[1m\]"
+SKYBLUE="\[\e[38;5;25m\e[1m\]"
+NONE="\[\e[0m\e[21m\]"
+
+# Prevent Mac OS ._ in in tar.gz files
+export COPYFILE_DISABLE=true
+
+# Homebrew
+export PATH="/usr/local/bin:${PATH}"
+
+# Homebrew completion
+if [[ -f "$(brew --prefix)/etc/bash_completion.d/brew" ]]; then
+    source "$(brew --prefix)/etc/bash_completion.d/brew"
+fi
+
+# Bash completion@2
+if [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
+    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+fi
+
+# Bash-Git-prompt
+if [[ -f "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh" ]]; then
+    GIT_PS1_SHOWCOLORHINTS=true
+    GIT_PS1_SHOWDIRTYSTATE=true
+    GIT_PS1_SHOWUNTRACKEDFILES=true
+    GIT_PS1_DESCRIBE_STYLE='default'
+    source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
+fi
+
+# exa is a replacement for ls https://github.com/ogham/exa
+if command -v exa 1>/dev/null 2>&1; then
+    alias ls="exa --group-directories-first --classify"
+fi
+
+# Python virtual environment
+# Allow pip only for active virtual environment
+# Use 'gpip' for global environment
+export PIP_REQUIRE_VIRTUALENV=true
+gpip(){
+    PIP_REQUIRE_VIRTUALENV="" pip "${@}"
+}
+
+# Pyenv Python version management
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+    pyenv virtualenvwrapper
+fi
+
+# PRIMARY PROMPT
+PROMPT_COMMAND='__git_ps1\
+                "\n${MAGENTA}[\d \t] ${SKYBLUE}$(python --version 2>&1)${NONE}\
+                \n\u@\h: ${CYAN}\w${NONE}"\
+                "\n${VIRTUAL_ENV:+($(basename ${VIRTUAL_ENV}))}\\$ "\
+                " (%s)"'
+EOF
+
+set -e
+###############################################################################
+
+devsetup_bash_config() {
+    printf "${magenta}" "Set up and improve Bash\n"
+
+    printf "${magenta}" "Set up the command line history search\n"
+    echo "${INPUTRC}" > "${HOME}/.inputrc"
+
+    printf "${magenta}" "Backup the current .bash_profile file\n"
+    if [[ -f "${HOME}/.bash_profile" ]]; then
+        cp "${HOME}/.bash_profile" "${HOME}/.bash_profile.bkp"
+    fi
+
+    printf "${magenta}" "Update the .bash_profile\n"
+    echo "${BASH_PROFILE}" > "${HOME}/.bash_profile"
+
+    printf "${magenta}" "Install bash-completion\n"
+    brew install bash-completion@2
+
+    printf "${magenta}" "Install docker command-line completion\n"
+    brew install docker-completion docker-machine-completion docker-compose-completion
+
+    printf "${magenta}" "Install exa\n"
+    brew install exa
+
+    printf "${green}" "\nBash setup completed.\n"
+}
+
+devsetup_install_bash() {
+    printf "${magenta}" "Update and set up Bash as the default shell\n"
+
+    wait_for_sudo
+    homebrew_update
+    brew install bash
+
+    if $(grep -Fxq "/usr/local/bin/bash" /etc/shells); then
+        printf "${magenta}" "The list of shells is already updated!\n"
+    else
+        printf "${magenta}" "Adding the new shell to the list of allowed shells\n"
+        sudo echo "/usr/local/bin/bash" >> /etc/shells
+    fi
+
+    printf "${magenta}" "Changing to the new shell\n"
+    chsh -s "/usr/local/bin/bash"
+
+    devsetup_bash_config
+
+    printf "${green}" "\nBash installation successful!\n"
+
+    printf "${magenta}" "\nClose and reopen the Terminal!\n"
+}
+
 # Parse mac-dev-setup options
-while [[ "${#}" -ge 0 ]]; do
+while [[ "${#}" -gt 0 ]]; do
     case "${1}" in
-        --help|'')
+        --help)
             print_version
             usage
             exit 0
@@ -120,6 +289,14 @@ while [[ "${#}" -ge 0 ]]; do
             ;;
         gitconfig)
             devsetup_git_config
+            exit 0
+            ;;
+        bash)
+            devsetup_install_bash
+            exit 0
+            ;;
+        bashconfig)
+            devsetup_bash_config
             exit 0
             ;;
         --|-*|*)

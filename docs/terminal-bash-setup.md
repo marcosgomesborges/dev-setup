@@ -32,6 +32,14 @@ Below is the Terminal using my personal theme and `.bash_profile` configuration.
 
 ## Update and select Bash as the default shell
 
+You can update and set up Bash following this tutorial or using the mac-dev-setup install script:
+
+```bash
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) bash
+```
+
+If you decide to do it on your own:
+
 1. Update bash:
 
     ```bash
@@ -64,6 +72,12 @@ Below is the Terminal using my personal theme and `.bash_profile` configuration.
 ## Improve Bash theme
 
 ![Bash command line history](../assets/terminal-bash.gif?raw=true)
+
+Follow the tutorial or just paste that on the Terminal:
+
+```bash
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) bashconfig
+```
 
 ### Set up the command line history search
 
