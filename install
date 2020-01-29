@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="0.4.0"
+VERSION="0.5.0"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -27,6 +27,7 @@ cat <<EOF
     bashconfig      Improve Bash
     zsh             Setup Oh My Zsh + Powerlevel9k + Nerd font
     python376       Install Pyenv and Python 3.7.6
+    pypackages      Install Python packages for data science
 EOF
 }
 
@@ -502,6 +503,70 @@ devsetup_install_python376() {
     printf "${green}" "\nPython installation successful!\n"
 }
 
+devsetup_install_pypackages() {
+    printf "${magenta}" "Install Python packages for data science\n"
+
+    printf "${magenta}" "Install dependencies\n"
+    brew install Graphviz
+
+    printf "${magenta}" "Create a Python virtual environment\n"
+    set +u
+    eval "$(pyenv init -)"
+    pyenv global 3.7.6
+    pyenv virtualenvwrapper
+    mkvirtualenv py376 || true
+    set -u
+    pip install --upgrade pip
+
+    printf "${magenta}" "Install TensorFlow\n"
+    pip install tensorflow
+
+    printf "${magenta}" "Install Keras\n"
+    pip install h5py pydot keras
+
+    printf "${magenta}" "Install Python scientific libraires\n"
+    pip install numpy \
+                pandas \
+                scipy \
+                pillow \
+                scikit-learn \
+                scikit-image \
+                sk-video
+
+    printf "${magenta}" "Install basic libraires\n"
+    pip install progressbar2 \
+                requests \
+                Cython \
+                pylint \
+                autopep8 \
+                pytest \
+                pydocstyle
+
+    printf "${magenta}" "Install Matplotlib\n"
+    pip install ipympl matplotlib
+
+    # Fix Matplotlib backend
+    mkdir -p "${HOME}/.config/matplotlib"
+    echo "backend : TkAgg" > "${HOME}/.config/matplotlib/matplotlibrc"
+
+    printf "${magenta}" "Install Node\n"
+    brew install node || true
+
+    printf "${magenta}" "Install Jupyter Lab\n"
+    pip install jupyterlab jupyterlab-git jupyter-tensorboard jupytext
+
+    printf "${magenta}" "Install Jupyter Lab extensions\n"
+    jupyter labextension install @jupyterlab/toc
+    jupyter labextension install @jupyterlab/git
+    jupyter serverextension enable --py jupyterlab_git
+    jupyter labextension install jupyterlab_tensorboard
+    jupyter labextension install jupyterlab-jupytext
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager
+    jupyter labextension install jupyter-matplotlib
+
+    printf "${green}" "\nPython setup completed.\n"
+}
+
 # Parse mac-dev-setup options
 while [[ "${#}" -gt 0 ]]; do
     case "${1}" in
@@ -536,6 +601,10 @@ while [[ "${#}" -gt 0 ]]; do
             ;;
         python376)
             devsetup_install_python376
+            exit 0
+            ;;
+        pypackages)
+            devsetup_install_pypackages
             exit 0
             ;;
         --|-*|*)

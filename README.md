@@ -189,7 +189,7 @@ bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/in
 
 ![Python Package](./assets/python-package.png?raw=true)
 
-[Python set-up guide](./docs/python-setup.md) will help to install Python libraries used by data scientists:
+### Python Packages
 
 * TensorFlow
 * Keras
@@ -202,6 +202,16 @@ bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/in
 * sk-video
 * Matplotlib
 * Jupyter lab & extensions
+
+### Install Python packages
+
+* Using mac-dev-setup install:
+
+    ```bash
+    bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) pypackages
+    ```
+
+* Or follow the [Python set-up guide](./docs/python-setup.md).
 
 ## Visual Studio Code - VS Code
 
