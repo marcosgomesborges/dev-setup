@@ -35,6 +35,9 @@ To edit the VS Code settings:
     "editor.renderControlCharacters": true,
     "editor.wordWrap":"on",
 
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
     "markdown-pdf.highlightStyle": "github.css",
     "cSpell.language": "en,fr",
 
@@ -89,6 +92,12 @@ Alternatively, you can use the terminal command:
 
 ```bash
 code --install-extension extension-name
+```
+
+### Install extensions using mac-dev-setup install
+
+```bash
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) vscode
 ```
 
 ## Visual Studio IntelliCode

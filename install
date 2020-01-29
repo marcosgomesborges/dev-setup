@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="0.5.0"
+VERSION="0.6.0"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -28,6 +28,7 @@ cat <<EOF
     zsh             Setup Oh My Zsh + Powerlevel9k + Nerd font
     python376       Install Pyenv and Python 3.7.6
     pypackages      Install Python packages for data science
+    vscode          Set up VS Code and install extensions
 EOF
 }
 
@@ -567,6 +568,162 @@ devsetup_install_pypackages() {
     printf "${green}" "\nPython setup completed.\n"
 }
 
+###############################################################################
+set +e
+
+# VSCODE_SETTINGS
+read -r -d '' VSCODE_SETTINGS <<"EOF"
+{
+    "terminal.integrated.fontFamily": "Hack Nerd Font",
+    "terminal.integrated.fontSize": 14,
+    
+    "window.zoomLevel": 0,
+
+    "editor.fontSize": 16,
+    "editor.rulers": [80, 120],
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": true,
+    "editor.wordWrap":"on",
+
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "markdown-pdf.highlightStyle": "github.css",
+    "cSpell.language": "en,fr",
+
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.outDir": "./build/",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": ["latexmk"]
+        },
+        {
+            "name": "pdflatex -> bibtex -> pdflatex*2",
+            "tools": ["pdflatex","bibtex","pdflatex","pdflatex"]
+        },
+        {
+            "name": "pdflatex -> biber -> pdflatex*2",
+            "tools": ["pdflatex","biber","pdflatex","pdflatex"]
+        },
+        {
+            "name": "pdflatex -> glossaries -> bibtex -> pdflatex*2",
+            "tools": ["pdflatex","makeglossaries","bibtex","pdflatex","pdflatex"]
+        },
+        {
+            "name": "pdflatex -> glossaries -> biber -> pdflatex*2",
+            "tools": ["pdflatex","makeglossaries","biber","pdflatex","pdflatex"]
+        }
+    ],
+
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-output-directory=build",
+                "-file-line-error",
+                "-pdf",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-output-directory=build",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "makeglossaries",
+            "command": "makeglossaries",
+            "args": ["-d","./build","%DOCFILE%"]
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": ["./build/%DOCFILE%"]
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": ["./build/%DOCFILE%"]
+        }
+    ],
+
+    "python.venvPath": "~/.virtualenvs/",
+}
+EOF
+
+set -e
+###############################################################################
+
+devsetup_install_code_extensions() {
+    if ! command -v code &>/dev/null; then
+        printf "${red}" "Error: "
+        printf "Visual Studio Code is not installed!\n"
+        printf "Install it from https://code.visualstudio.com\n"
+        exit 1
+    fi
+
+    printf "${magenta}" "Installing VS Code extensions\n"
+    # code --list-extensions | xargs -L 1 echo code --install-extension
+    code --install-extension aaron-bond.better-comments
+    code --install-extension bierner.markdown-emoji
+    code --install-extension bierner.markdown-preview-github-styles
+    code --install-extension christian-kohler.path-intellisense
+    code --install-extension CoenraadS.bracket-pair-colorizer
+    code --install-extension DavidAnson.vscode-markdownlint
+    code --install-extension dbaeumer.jshint
+    code --install-extension dbaeumer.vscode-eslint
+    code --install-extension donjayamanne.githistory
+    code --install-extension eamodio.gitlens
+    code --install-extension ecmel.vscode-html-css
+    code --install-extension eg2.vscode-npm-script
+    code --install-extension esbenp.prettier-vscode
+    code --install-extension humao.rest-client
+    code --install-extension James-Yu.latex-workshop
+    code --install-extension ms-azuretools.vscode-docker
+    code --install-extension ms-python.python
+    code --install-extension ms-vscode-remote.remote-ssh
+    code --install-extension ms-vscode-remote.remote-ssh-edit
+    code --install-extension ms-vscode.cmake-tools
+    code --install-extension ms-vscode.cpptools
+    code --install-extension msjsdiag.debugger-for-chrome
+    code --install-extension msjsdiag.vscode-react-native
+    code --install-extension oderwat.indent-rainbow
+    code --install-extension redhat.vscode-yaml
+    code --install-extension ritwickdey.LiveServer
+    code --install-extension streetsidesoftware.code-spell-checker
+    code --install-extension streetsidesoftware.code-spell-checker-french
+    code --install-extension twxs.cmake
+    code --install-extension VisualStudioExptTeam.vscodeintellicode
+    code --install-extension yzane.markdown-pdf
+    code --install-extension yzhang.markdown-all-in-one
+
+    if command -v git &>/dev/null; then
+        printf "${magenta}" "Configuring vscode as default git editor\n"
+        git config --global core.editor 'code --wait'
+
+        printf "${magenta}" "Configuring vscode as default git diff tool\n"
+        git config --global diff.tool vscode
+        git config --global difftool.vscode.cmd 'code --wait --diff ${LOCAL} ${REMOTE}'
+    fi
+
+    printf "${magenta}" "Update VS Code settings\n"
+    DIR="${HOME}/Library/Application Support/Code/User/settings.json"
+    echo "${VSCODE_SETTINGS}" > "${DIR}"
+
+    printf "${green}" "\nVS Code configured successful.\n"
+}
+
 # Parse mac-dev-setup options
 while [[ "${#}" -gt 0 ]]; do
     case "${1}" in
@@ -605,6 +762,10 @@ while [[ "${#}" -gt 0 ]]; do
             ;;
         pypackages)
             devsetup_install_pypackages
+            exit 0
+            ;;
+        vscode)
+            devsetup_install_code_extensions
             exit 0
             ;;
         --|-*|*)
