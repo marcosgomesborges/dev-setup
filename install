@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="0.7.0"
+VERSION="1.0.0"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -426,6 +426,8 @@ set -e
 devsetup_install_zsh() {
     printf "${magenta}" "Set up Oh My Zsh + Powerlevel9k + Nerd font\n"
 
+    homebrew_update
+
     printf "${magenta}" "Update and select Zsh as the default shell\n"
     brew install zsh
 
@@ -490,6 +492,8 @@ devsetup_install_zsh() {
 devsetup_install_python376() {
     printf "${magenta}" "Install Pyenv and Python 3.7.6\n"
 
+    homebrew_update
+
     printf "${magenta}" "Install Pyenv\n"
     brew install pyenv
     brew install pyenv-virtualenvwrapper
@@ -507,6 +511,8 @@ devsetup_install_python376() {
 
 devsetup_install_pypackages() {
     printf "${magenta}" "Install Python packages for data science\n"
+
+    homebrew_update
 
     printf "${magenta}" "Install dependencies\n"
     brew install Graphviz
@@ -729,6 +735,8 @@ devsetup_install_opencv() {
     OPENCV_VERSION="4.2.0"
 
     printf "${magenta}" "Install OpenCV with Python and Qt support\n"
+
+    homebrew_update
 
     printf "${magenta}" "Installing Opencv dependencies\n"
     brew install cmake pkg-config ceres-solver eigen ffmpeg glog \

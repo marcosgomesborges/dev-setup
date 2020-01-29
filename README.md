@@ -4,6 +4,45 @@ A macOS development environment setup guide and command-line tool.
 
 ![Release][release-install-shield] ![Doc][release-doc-shield] [![License][license-shield]](LICENSE.md) [![Twitter][twitter-shield]](https://twitter.com/mgomesborges)
 
+## macos-dev-setup install
+
+To automate the setup process, use the mac-dev-setup command-line tool.
+
+```bash
+# Install and set up Git
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) git
+```
+
+```bash
+# Update and set up Bash as the default shell
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) bash
+```
+
+```bash
+# Setup Oh My Zsh + Powerlevel9k + Nerd font
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) zsh
+```
+
+```bash
+# Install Pyenv and Python 3.7.6
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) python376
+```
+
+```bash
+# Install Python packages for data science
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) pypackages
+```
+
+```bash
+# Set up VS Code and install extensions
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) vscode
+```
+
+```bash
+# Install OpenCV 4.2.0 with Python and Qt support
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) opencv
+```
+
 ## Command Line Tools (mandatory)
 
 ![Command Line Tools](./assets/terminal.png?raw=true)
@@ -535,6 +574,6 @@ The source code is licensed under the [MIT license](LICENSE.md).
 The content of this project itself is licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0).
 
 [twitter-shield]: https://img.shields.io/twitter/follow/mgomesborges?label=Follow&style=social
-[release-doc-shield]: https://img.shields.io/badge/Doc-27--Jan--2020-blue
+[release-doc-shield]: https://img.shields.io/badge/Doc-30--Jan--2020-blue
 [release-install-shield]: https://img.shields.io/badge/dynamic/json?color=blue&label=Release&prefix=install-&query=$.release&url=https://raw.githubusercontent.com/mgomesborges/dev-setup/master/package.json
 [license-shield]: https://img.shields.io/github/license/mgomesborges/mac-dev-setup.svg
