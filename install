@@ -1,0 +1,130 @@
+#!/bin/bash
+# mac-dev-setup Development Environment Setup
+# https://github.com/mgomesborges/mac-dev-setup
+#
+# Copyright (c) Marcos Gomes-Borges
+
+VERSION="0.1.0"
+PREFIX="${HOME}"
+
+red="\033[91m%b\033[39m"
+green="\033[92m%b\033[39m"
+magenta="\033[95m%b\033[39m"
+
+usage() {
+cat <<EOF
+    Usage: install [OPTIONS]
+
+    OPTION          MEANING
+    --help          Display this help message
+    --version       Display the mac-dev-setup install version
+
+    git             Install and set up Git
+    gitconfig       Set up Git
+EOF
+}
+
+print_version() {
+    printf "mac-dev-setup install ${VERSION}\n"
+}
+
+usage_fatal() {
+    usage
+    printf "${red}" "\nError: "
+    printf "Illegal option!\n"
+}
+
+wait_for_user() {
+    printf "\nPress RETURN to continue or any other key to abort!\n"
+
+    read -rsn 1 key
+    if [[ ${key} != "" ]]; then
+        exit 0
+    fi
+}
+
+# Check if Homebrew is installed and update it
+homebrew_update() {
+    if command -v brew &>/dev/null; then
+        printf "${magenta}" "Updating Homebrew!\n"
+        brew update
+    else
+        BREW_URL='/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+
+        printf "Homebrew is required for the installation.\n\n"
+        printf "Install homebrew using the following command:\n"
+        printf "${BREW_URL}\n"
+        printf "${red}" "\nError: "
+        printf "Homebrew is not installed!\n"
+        exit 1
+    fi
+}
+
+devsetup_git_config() {
+    printf "${magenta}" "\nGit configuration - Ctrl+C to cancel\n"
+
+    printf "git config --global user.name 'Your name': "
+    read -r GIT_USER_NAME
+
+    printf "git config --global user.email 'your@email.com': "
+    read -r GIT_USER_EMAIL
+
+    # Confirm user input
+    printf "${magenta}" "\nUser Name: "
+    printf "${GIT_USER_NAME}\n"
+    printf "${magenta}" "E-mail   : "
+    printf "${GIT_USER_EMAIL}\n"
+
+    wait_for_user
+
+    # Set git user name and email
+    git config --global user.name "${GIT_USER_NAME}"
+    git config --global user.email "${GIT_USER_EMAIL}"
+
+    # Set git terminal colors
+    git config --global color.ui true
+    git config --global color.status.changed "blue normal"
+    git config --global color.status.untracked "red normal"
+    git config --global color.status.added "magenta normal"
+    git config --global color.status.updated "green normal"
+    git config --global color.status.branch "yellow normal bold"
+    git config --global color.status.header "white normal bold"
+
+    printf "${green}" "\nGit setup completed.\n"
+}
+
+devsetup_install_git() {
+    homebrew_update
+
+    printf "${magenta}" "Installing Git!\n"
+    brew install git
+    devsetup_git_config
+    printf "${green}" "\nGit installation successful.\n"
+}
+
+# Parse mac-dev-setup options
+while [[ "${#}" -ge 0 ]]; do
+    case "${1}" in
+        --help|'')
+            print_version
+            usage
+            exit 0
+            ;;
+        --version)
+            print_version
+            exit 0
+            ;;
+        git)
+            devsetup_install_git
+            exit 0
+            ;;
+        gitconfig)
+            devsetup_git_config
+            exit 0
+            ;;
+        --|-*|*)
+            usage_fatal "${1}"
+            exit 1
+            ;;
+    esac
+done

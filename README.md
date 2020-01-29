@@ -1,8 +1,8 @@
 # macOS Development Setup
 
-A macOS development environment setup guide and installation scripts.
+A macOS development environment setup guide and command-line tool.
 
-![Release-macOS-doc][release-macos-shield] [![License][license-shield]](LICENSE.md) [![Twitter][twitter-shield]](https://twitter.com/mgomesborges)
+![Release][release-install-shield] ![Doc][release-doc-shield] [![License][license-shield]](LICENSE.md) [![Twitter][twitter-shield]](https://twitter.com/mgomesborges)
 
 ## Command Line Tools (mandatory)
 
@@ -60,31 +60,27 @@ Open the terminal and run the following script:
 
 [Git](https://git-scm.com) is a free and open source distributed version control system.
 
-### Install Git
+### Install and set up git
 
-Run on the terminal:
+You can install git following this tutorial or using the mac-dev-setup install script.
 
-```bash
-brew install git
-```
+* Using mac-dev-setup install:
 
-### Configure Git
+    ```bash
+    bash <(curl -fsSL https://raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) git
+    ```
 
-Paste that in the terminal:
+* Install git on your own:
 
-```bash
-git_config_global() {
-    printf "\nGit configuration - Ctrl+C to cancel\n"
+    ```bash
+    # Install git
+    brew install git
+    ```
 
-    printf "\nUser name (example: M Gomes-Borges) : "
-    read -r GIT_USER_NAME
-
-    printf "\nE-mail (example: git@gomes-borges.com): "
-    read -r GIT_USER_EMAIL
-
+    ```bash
     # Set git user name and email
-    git config --global user.name "${GIT_USER_NAME}"
-    git config --global user.email "${GIT_USER_EMAIL}"
+    git config --global user.name "Your Name"
+    git config --global user.email "your@email.com"
 
     # Set git terminal colors
     git config --global color.ui true
@@ -94,12 +90,7 @@ git_config_global() {
     git config --global color.status.updated "green normal"
     git config --global color.status.branch "yellow normal bold"
     git config --global color.status.header "white normal bold"
-
-    printf "\nGit setup completed\n"
-}
-
-git_config_global
-```
+    ```
 
 ### Check Git configuration
 
@@ -526,5 +517,6 @@ The source code is licensed under the [MIT license](LICENSE.md).
 The content of this project itself is licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0).
 
 [twitter-shield]: https://img.shields.io/twitter/follow/mgomesborges?label=Follow&style=social
-[release-macos-shield]: https://img.shields.io/badge/Doc-18--Jan--2020-blue
+[release-doc-shield]: https://img.shields.io/badge/Doc-27--Jan--2020-blue
+[release-install-shield]: https://img.shields.io/badge/dynamic/json?color=blue&label=Release&prefix=install-&query=$.release&url=https://raw.githubusercontent.com/mgomesborges/dev-setup/master/package.json
 [license-shield]: https://img.shields.io/github/license/mgomesborges/mac-dev-setup.svg
