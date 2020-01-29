@@ -67,7 +67,7 @@ You can install git following this tutorial or using the mac-dev-setup install s
 * Using mac-dev-setup install:
 
     ```bash
-    bash <(curl -fsSL https://raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) git
+    bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) git
     ```
 
 * Install git on your own:
@@ -121,6 +121,12 @@ Check out how to select your shell and set up your terminal theme:
 
 [Python](https://www.python.org) is a programming language that lets you work quickly
 and integrate systems more effectively.
+
+### Install Pyenv and Python 3.7.6 using mac-dev-setup install
+
+```bash
+bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) python376
+```
 
 ### Install Pyenv
 

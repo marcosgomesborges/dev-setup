@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="0.3.0"
+VERSION="0.4.0"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -26,6 +26,7 @@ cat <<EOF
     bash            Update and set up Bash as the default shell
     bashconfig      Improve Bash
     zsh             Setup Oh My Zsh + Powerlevel9k + Nerd font
+    python376       Install Pyenv and Python 3.7.6
 EOF
 }
 
@@ -483,6 +484,24 @@ devsetup_install_zsh() {
     printf "${red}" "\nClose and reopen the Terminal!\n"
 }
 
+devsetup_install_python376() {
+    printf "${magenta}" "Install Pyenv and Python 3.7.6\n"
+
+    printf "${magenta}" "Install Pyenv\n"
+    brew install pyenv
+    brew install pyenv-virtualenvwrapper
+
+    printf "${magenta}" "Install Python 3.7.6\n"
+    eval "$(pyenv init -)"
+    PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.7.6
+
+    printf "${magenta}" "Set Python 3.7.6 as default\n"
+    pyenv global 3.7.6
+    pyenv virtualenvwrapper
+
+    printf "${green}" "\nPython installation successful!\n"
+}
+
 # Parse mac-dev-setup options
 while [[ "${#}" -gt 0 ]]; do
     case "${1}" in
@@ -513,6 +532,10 @@ while [[ "${#}" -gt 0 ]]; do
             ;;
         zsh)
             devsetup_install_zsh
+            exit 0
+            ;;
+        python376)
+            devsetup_install_python376
             exit 0
             ;;
         --|-*|*)
