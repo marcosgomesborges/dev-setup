@@ -435,6 +435,7 @@ devsetup_install_zsh() {
     if $(grep -Fxq "/usr/local/bin/zsh" /etc/shells); then
         printf "${magenta}" "The list of shells is already updated!\n"
     else
+        wait_for_sudo
         sudo echo "/usr/local/bin/zsh" >> /etc/shells
     fi
 
