@@ -15,9 +15,9 @@ brew install Graphviz
 ## Create a Python virtual environment
 
 ```bash
-# Example using Python 3.6.10
-pyenv shell 3.6.10
-mkvirtualenv py3610
+# Example using Python 3.7.6
+pyenv shell 3.7.6
+mkvirtualenv py376
 pip install --upgrade pip
 ```
 
@@ -27,7 +27,7 @@ pip install --upgrade pip
 
 ```bash
 # Activate the virtual environment
-workon py3610
+workon py376
 
 # Install TensorFlow
 pip install tensorflow
@@ -39,7 +39,7 @@ pip install tensorflow
 
 ```bash
 # Activate the virtual environment
-workon py3610
+workon py376
 
 # Install Keras
 pip install h5py pydot keras
@@ -49,7 +49,7 @@ pip install h5py pydot keras
 
 ```bash
 # Activate the virtual environment
-workon py3610
+workon py376
 
 # Install libraries
 pip install numpy \
@@ -65,7 +65,7 @@ pip install numpy \
 
 ```bash
 # Activate the virtual environment
-workon py3610
+workon py376
 
 # Install libraries
 pip install progressbar2 \
@@ -81,7 +81,7 @@ pip install progressbar2 \
 
 ```bash
 # Activate the virtual environment
-workon py3610
+workon py376
 
 # Install Matplotlib
 pip install ipympl matplotlib
@@ -107,7 +107,7 @@ echo "backend : TkAgg" > "${HOME}/.config/matplotlib/matplotlibrc"
 
     ```bash
     # Activate Python environment
-    workon py3610
+    workon py376
 
     # Install Jupyterlab
     pip install jupyterlab jupyterlab-git jupyter-tensorboard jupytext
@@ -117,7 +117,7 @@ echo "backend : TkAgg" > "${HOME}/.config/matplotlib/matplotlibrc"
 
     ```bash
     # Activate Python environment
-    workon py3610
+    workon py376
 
     # Install extensions
     jupyter labextension install @jupyterlab/toc
