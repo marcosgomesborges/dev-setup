@@ -568,16 +568,19 @@ devsetup_install_pypackages() {
     brew install node || true
 
     printf "${magenta}" "Install Jupyter Lab\n"
-    pip install jupyterlab==1.2.7 jupyterlab-git jupyter-tensorboard jupytext
+    pip install jupyterlab==1.2.7 nbdime==1.1.0 jupyterlab-git jupyter-tensorboard
+    # pip install jupytext
 
     printf "${magenta}" "Install Jupyter Lab extensions\n"
     jupyter labextension install @jupyterlab/toc
     jupyter labextension install @jupyterlab/git
     jupyter serverextension enable --py jupyterlab_git
     jupyter labextension install jupyterlab_tensorboard
-    jupyter labextension install jupyterlab-jupytext
+    # jupyter labextension install jupyterlab-jupytext
     jupyter labextension install @jupyter-widgets/jupyterlab-manager
     jupyter labextension install jupyter-matplotlib
+
+    jupyter labextension list
 
     printf "${green}" "\nPython setup completed.\n"
 }
