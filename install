@@ -568,7 +568,7 @@ devsetup_install_pypackages() {
     brew install node || true
 
     printf "${magenta}" "Install Jupyter Lab\n"
-    pip install jupyterlab jupyterlab-git jupyter-tensorboard jupytext
+    pip install jupyterlab==1.2.7 jupyterlab-git jupyter-tensorboard jupytext
 
     printf "${magenta}" "Install Jupyter Lab extensions\n"
     jupyter labextension install @jupyterlab/toc
