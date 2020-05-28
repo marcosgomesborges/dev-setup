@@ -4,45 +4,6 @@ A macOS development environment setup guide and command-line tool.
 
 ![Release][release-install-shield] ![Doc][release-doc-shield] [![License][license-shield]](LICENSE.md) [![Twitter][twitter-shield]](https://twitter.com/mgomesborges)
 
-## macos-dev-setup install
-
-To automate the setup process, use the mac-dev-setup command-line tool.
-
-```bash
-# Install and set up Git
-bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) git
-```
-
-```bash
-# Update and set up Bash as the default shell
-bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) bash
-```
-
-```bash
-# Setup Oh My Zsh + Powerlevel9k + Nerd font
-bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) zsh
-```
-
-```bash
-# Install Pyenv and Python 3.7.6
-bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) python376
-```
-
-```bash
-# Install Python packages for data science
-bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) pypackages
-```
-
-```bash
-# Set up VS Code and install extensions
-bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) vscode
-```
-
-```bash
-# Install OpenCV 4.2.0 with Python and Qt support
-bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) opencv
-```
-
 ## Command Line Tools (mandatory)
 
 ![Command Line Tools](./assets/terminal.png?raw=true)
@@ -101,15 +62,13 @@ Open the terminal and run the following script:
 
 ### Install and set up git
 
-You can install git following this tutorial or using the mac-dev-setup install script.
-
-* Using mac-dev-setup install:
+* **Option 1** Easy install using mac-dev-setup:
 
     ```bash
     bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) git
     ```
 
-* Install git on your own:
+* **Option 2** Install on your own:
 
     ```bash
     # Install git
@@ -161,61 +120,58 @@ Check out how to select your shell and set up your terminal theme:
 [Python](https://www.python.org) is a programming language that lets you work quickly
 and integrate systems more effectively.
 
-### Install Pyenv and Python 3.7.6 using mac-dev-setup install
+### Install Pyenv and Python 3.7.6
 
-```bash
-bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) python376
-```
+[Pyenv](https://github.com/pyenv/pyenv) lets you easily switch between multiple versions of Python.
 
-### Install Pyenv
-
-[Pyenv](https://github.com/pyenv/pyenv) lets you easily switch between multiple versions of Python. It's simple:
-
-1. Install pyenv:
+* **Option 1** Easy install using mac-dev-setup:
 
     ```bash
-    brew install pyenv
+    bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) python376
     ```
 
-2. Install pyenv-virtualenvwrapper :
+* **Option 2** Install on your own:
 
-    ```bash
-    brew install pyenv-virtualenvwrapper
-    ```
+  1. Install pyenv:
 
-### Install Python
+      ```bash
+      brew install pyenv
+      ```
 
-1. Init Pyenv:
+  2. Install pyenv-virtualenvwrapper :
 
-    ```bash
-    eval "$(pyenv init -)"
-    ```
+      ```bash
+      brew install pyenv-virtualenvwrapper
+      ```
 
-2. List the available Python versions:
+  3. Init Pyenv:
 
-    ```bash
-    pyenv install --list
-    ```
+      ```bash
+      eval "$(pyenv init -)"
+      ```
 
-3. Install the Python versions you want using the example below:
+  4. List the available Python versions:
 
-    ```bash
-    # Python 3.6.10
-    PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.6.10
+      ```bash
+      pyenv install --list
+      ```
 
-    # Python 3.7.6
-    PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.7.6
+  5. Install the Python versions you want using the example below:
 
-    # Python 3.8.1
-    PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.8.1
-    ```
+      ```bash
+      # Python 3.7.6
+      PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.7.6
+
+      # Python 3.8.1
+      PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.8.1
+      ```
 
 ### Set the Python version you want as default
 
 1. Set the default Python version:
 
     ```bash
-    pyenv global 3.6.10
+    pyenv global 3.7.6
     ```
 
 2. Set up the virtualenvwrapper:
@@ -244,7 +200,7 @@ bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/in
 
 ### Install Python packages
 
-* Using mac-dev-setup install:
+* Easy install using mac-dev-setup:
 
     ```bash
     bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) pypackages
@@ -348,7 +304,7 @@ To keep compatibility, use [Python 3.7.6](#install-python).
 
 ### Install OpenCV with Python and Qt support
 
-* Using mac-dev-setup install:
+* Easy install using mac-dev-setup:
 
     ```bash
     bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) opencv
