@@ -302,15 +302,53 @@ brew install ffmpeg
 
 To keep compatibility, use [Python 3.7.6](#install-python).
 
+### UPGRADE OpenCV
+
+1. Uninstall old version:
+
+    ```bash
+    CV_DIRS=(
+        "/usr/local/share"
+        "/usr/local/include"
+        "/usr/local/lib"
+        "/usr/local/bin"
+    )
+
+    sudo -v
+
+    for cv_dir in ${CV_DIRS[@]}; do
+        sudo find ${cv_dir} -name "*opencv*" -exec rm -rf {} \;
+    done
+    ```
+
+2. Remove installation directories:
+
+    ```bash
+    rm -rf "${HOME}/opencv"
+    rm -rf "${HOME}/opencv_contrib"
+    ```
+
+3. Install OpenCV following the instructions below!
+
 ### Install OpenCV with Python and Qt support
 
-* Easy install using mac-dev-setup:
+1. Choose the version. Paste that in the terminal prompt:
+
+    ```bash
+    # export OPENCV_VERSION="4.3.0"
+    # export OPENCV_VERSION="4.2.0"
+    # export OPENCV_VERSION="4.1.2"
+    # export OPENCV_VERSION="3.4.10"
+    export OPENCV_VERSION="4.3.0"
+    ```
+
+2. Easy install using mac-dev-setup:
 
     ```bash
     bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) opencv
     ```
 
-* Install opencv on your own:
+3. Install on your own:
 
     ```bash
     # Installing Opencv dependencies
@@ -328,7 +366,6 @@ To keep compatibility, use [Python 3.7.6](#install-python).
 
     ```bash
     # Download OpenCV
-    OPENCV_VERSION="4.2.0"
 
     # Clone OpenCV project from GitHub
     git clone https://github.com/opencv/opencv "${HOME}/opencv"
@@ -530,6 +567,6 @@ The source code is licensed under the [MIT license](LICENSE.md).
 The content of this project itself is licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0).
 
 [twitter-shield]: https://img.shields.io/twitter/follow/mgomesborges?label=Follow&style=social
-[release-doc-shield]: https://img.shields.io/badge/Doc-30--Jan--2020-blue
+[release-doc-shield]: https://img.shields.io/badge/Doc-28--May--2020-blue
 [release-install-shield]: https://img.shields.io/badge/dynamic/json?color=blue&label=Release&prefix=install-&query=$.release&url=https://raw.githubusercontent.com/mgomesborges/dev-setup/master/package.json
 [license-shield]: https://img.shields.io/github/license/mgomesborges/mac-dev-setup.svg
