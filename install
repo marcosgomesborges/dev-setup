@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="1.1.0"
+VERSION="1.1.2"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -712,6 +712,8 @@ devsetup_install_code_extensions() {
     code --install-extension ms-vscode-remote.remote-ssh
     code --install-extension ms-vscode-remote.remote-ssh-edit
     code --install-extension ms-vscode.cmake-tools
+    code --install-extension jock.svg
+    code --install-extension cssho.vscode-svgviewer
     code --install-extension ms-vscode.cpptools
     code --install-extension msjsdiag.debugger-for-chrome
     code --install-extension msjsdiag.vscode-react-native

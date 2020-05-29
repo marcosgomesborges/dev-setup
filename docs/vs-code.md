@@ -70,6 +70,12 @@ git config --global diff.tool vscode
 git config --global difftool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'
 ```
 
+## Using VS Code with particular technologies
+
+Microsoft created a collection of recipes for using VS Code with particular technologies (mostly Web).
+
+Make sure to visit it at [Microsoft/vscode-recipes](https://github.com/Microsoft/vscode-recipes).
+
 ## VS Code Extensions
 
 ![VS Code Extensions](../assets/vs-code-extensions.png?raw=true)
@@ -493,6 +499,30 @@ code --install-extension ms-vscode.cmake-tools
 ```
 
 ![CMake Tools](../assets/vs-code-cmake-tools-example.png?raw=true)
+
+## SVG
+
+![SVG](../assets/vs-code-svg.png)
+
+[SVG](https://marketplace.visualstudio.com/items?itemName=jock.svg) - A Powerful SVG Language Support Extension. Almost all the features you need to handle SVG.
+
+```bash
+code --install-extension jock.svg
+```
+
+![SVG](../assets/vs-code-svg-autocomplete.png)
+
+## SVG Viewer
+
+![SVG Viewer](../assets/vs-code-svg-viewer.png)
+
+[SVG Viewer](https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer) - view an SVG in the editor and export it as data URI scheme or PNG.
+
+```bash
+code --install-extension cssho.vscode-svgviewer
+```
+
+![SVG Viewer](../assets/vs-code-svg-viewer.gif)
 
 ## LaTeX Workshop
 
