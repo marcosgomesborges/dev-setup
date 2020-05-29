@@ -127,4 +127,7 @@ echo "backend : TkAgg" > "${HOME}/.config/matplotlib/matplotlibrc"
     jupyter labextension install jupyterlab-jupytext
     jupyter labextension install @jupyter-widgets/jupyterlab-manager
     jupyter labextension install jupyter-matplotlib
+
+    # Check extensions status
+    jupyter labextension list
     ```
