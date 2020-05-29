@@ -154,19 +154,12 @@ and integrate systems more effectively.
 
 ### Python Packages
 
-* TensorFlow
-* Keras
-* numpy
-* pandas
-* scipy
-* pillow
-* scikit-learn
-* scikit-image
-* sk-video
-* Matplotlib
+* TensorFlow, Keras, numpy, pandas
+* scipy, scikit-learn, scikit-image, sk-video
+* Matplotlib, pillow
 * Jupyter lab & extensions
 
-### Install Python packages
+### Install Python Data Science packages
 
 * Easy install using mac-dev-setup:
 
@@ -174,7 +167,7 @@ and integrate systems more effectively.
     bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) pypackages
     ```
 
-* Or follow the [Python set-up guide](./docs/python-setup.md).
+* Or follow the [Python Data Science set-up guide](./docs/python-data-science-setup.md).
 
 ## Visual Studio Code - VS Code
 
