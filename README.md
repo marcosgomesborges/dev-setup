@@ -62,45 +62,13 @@ Open the terminal and run the following script:
 
 ### Install and set up git
 
-* **Option 1** Easy install using mac-dev-setup:
+* Easy install using mac-dev-setup:
 
     ```bash
     bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) git
     ```
 
-* **Option 2** Install on your own:
-
-    ```bash
-    # Install git
-    brew install git
-    ```
-
-    ```bash
-    # Set git user name and email
-    git config --global user.name "Your Name"
-    git config --global user.email "your@email.com"
-
-    # Set git terminal colors
-    git config --global color.ui true
-    git config --global color.status.changed "blue normal"
-    git config --global color.status.untracked "red normal"
-    git config --global color.status.added "magenta normal"
-    git config --global color.status.updated "green normal"
-    git config --global color.status.branch "yellow normal bold"
-    git config --global color.status.header "white normal bold"
-    ```
-
-### Check Git configuration
-
-Check your name and e-mail:
-
-```bash
-git config --global --list
-
-# user.name=Your User Name
-# user.email=your@email.com
-# ...
-```
+* Or follow the [Git set-up guide](./docs/git-setup.md).
 
 ## Terminal
 
@@ -263,7 +231,7 @@ Check out the [VS Code set-up guide](./docs/vs-code.md).
 7. On the Qt Creator User Experience Development window, make your choice and click `Continue`
 8. Click `Continue` on the Installation Folder window
 9. Select the latest Qt version prebuilt components:
-   * [x] `Qt 5.14.0` / `macOS`
+   * [x] `Qt 5.15.0` / `macOS`
    * [x] `Developer and Designer Tools` / `Qt Installer Framework 3.2`
 10. Then click `Next` and `Install`
 
