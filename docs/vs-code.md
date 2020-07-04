@@ -356,6 +356,8 @@ code --install-extension msjsdiag.vscode-react-native
 code --install-extension msjsdiag.debugger-for-chrome
 ```
 
+![Debugger for Chrome](../assets/vs-code-debugger-for-chrome.gif?raw=true)
+
 ## Live Server
 
 ![Live Server](../assets/vs-code-live-server.png?raw=true)
