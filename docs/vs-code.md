@@ -380,6 +380,8 @@ code --install-extension ritwickdey.LiveServer
 code --install-extension eg2.vscode-npm-script
 ```
 
+![npm validation](../assets/vs-code-npm-validation.png?raw=true)
+
 ## REST Client
 
 ![REST Client](../assets/vs-code-rest-client.png?raw=true)
