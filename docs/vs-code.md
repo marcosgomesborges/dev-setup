@@ -462,6 +462,8 @@ Check out the [Working with Docker](https://code.visualstudio.com/docs/azure/doc
 code --install-extension ms-azuretools.vscode-docker
 ```
 
+![Docker](../assets/vs-code-docker.gif?raw=true)
+
 ## YAML
 
 ![YAML](../assets/vs-code-yaml.png?raw=true)
