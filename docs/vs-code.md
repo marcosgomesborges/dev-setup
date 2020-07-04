@@ -474,6 +474,8 @@ code --install-extension ms-azuretools.vscode-docker
 code --install-extension redhat.vscode-yaml
 ```
 
+![YAML](../assets/vs-code-yaml.gif?raw=true)
+
 ## CMake
 
 ![CMake](../assets/vs-code-cmake.png?raw=true)
