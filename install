@@ -696,7 +696,7 @@ devsetup_install_code_extensions() {
     code --install-extension bierner.markdown-emoji
     code --install-extension bierner.markdown-preview-github-styles
     code --install-extension christian-kohler.path-intellisense
-    code --install-extension CoenraadS.bracket-pair-colorizer
+    code --install-extension CoenraadS.bracket-pair-colorizer-2
     code --install-extension DavidAnson.vscode-markdownlint
     code --install-extension dbaeumer.jshint
     code --install-extension dbaeumer.vscode-eslint

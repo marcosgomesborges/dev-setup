@@ -168,14 +168,14 @@ code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension esbenp.prettier-vscode
 ```
 
-## Bracket Pair Colorizer
+## Bracket Pair Colorizer 2
 
 ![Bracket Pair Colorizer](../assets/vs-code-bracket-pair-colorizer.png?raw=true)
 
-[Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer) is a customizable extension for colorizing matching brackets.
+[Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2) is a customizable extension for colorizing matching brackets.
 
 ```bash
-code --install-extension CoenraadS.bracket-pair-colorizer
+code --install-extension CoenraadS.bracket-pair-colorizer-2
 ```
 
 ## Better Comments
