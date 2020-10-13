@@ -2,7 +2,7 @@
 
 A macOS development environment setup guide and command-line tool.
 
-![Release][release-install-shield] ![Doc][release-doc-shield] [![License][license-shield]](LICENSE.md) [![Twitter][twitter-shield]](https://twitter.com/mgomesborges)
+![Release][release-install-shield] ![Doc][release-doc-shield] [![License][license-shield]](LICENSE.md)
 
 ## Command Line Tools (mandatory)
 
@@ -256,11 +256,9 @@ brew install ffmpeg
 1. Choose the version. Paste that in the terminal prompt:
 
     ```bash
-    # export OPENCV_VERSION="4.3.0"
-    # export OPENCV_VERSION="4.2.0"
-    # export OPENCV_VERSION="4.1.2"
-    # export OPENCV_VERSION="3.4.10"
-    export OPENCV_VERSION="4.3.0"
+    # export OPENCV_VERSION="4.X.X"
+    # export OPENCV_VERSION="3.4.X"
+    export OPENCV_VERSION="4.5.0"
     ```
 
 2. Easy install using mac-dev-setup:
@@ -284,7 +282,6 @@ If you are interested in fixing issues and contributing directly to the code bas
 
 * [Request a new feature](CONTRIBUTING.md)
 * [File an issue](https://github.com/mgomesborges/mac-dev-setup/issues)
-* Ask a question on [Twitter](https://twitter.com/mgomesborges)
 
 ## Author
 
@@ -296,7 +293,6 @@ The source code is licensed under the [MIT license](LICENSE.md).
 
 The content of this project itself is licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0).
 
-[twitter-shield]: https://img.shields.io/twitter/follow/mgomesborges?label=Follow&style=social
 [release-doc-shield]: https://img.shields.io/badge/Doc-29--May--2020-blue
 [release-install-shield]: https://img.shields.io/badge/dynamic/json?color=blue&label=Release&prefix=install-&query=$.release&url=https://raw.githubusercontent.com/mgomesborges/dev-setup/master/package.json
 [license-shield]: https://img.shields.io/github/license/mgomesborges/mac-dev-setup.svg
