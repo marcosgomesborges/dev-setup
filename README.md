@@ -161,7 +161,7 @@ Make sure to visit it at [Microsoft/vscode-recipes](https://github.com/Microsoft
 
     ![MacTex](./assets/mactex-installation01.png?raw=true)
 
-6. Deselect the packages `GUI-Applications` and `Ghostscript`, then click on `Install`
+6. Deselect the packages `Ghostscript 9.50`, `Ghostscript Dynamic Library` and `GUI Applications`, then click on `Install`
 
     ![MacTex](./assets/mactex-installation02.png?raw=true)
 
