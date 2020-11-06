@@ -68,13 +68,14 @@ pip install numpy \
 workon py376
 
 # Install libraries
-pip install progressbar2 \
-            requests \
+pip install autopep8 \
             Cython \
+            ipykernel \
+            progressbar2 \
+            pydocstyle \
             pylint \
-            autopep8 \
             pytest \
-            pydocstyle
+            requests
 ```
 
 ## Install Matplotlib
