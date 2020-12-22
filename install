@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="1.1.5"
+VERSION="1.1.6"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -749,8 +749,8 @@ devsetup_install_opencv() {
     if [[ -z "${OPENCV_VERSION+x}" ]]; then
         printf "${magenta}" "Choose a version using the command below:"
         printf '
-            export OPENCV_VERSION="3.4.12"
-            export OPENCV_VERSION="4.5.0"
+            export OPENCV_VERSION="3.4.13"
+            export OPENCV_VERSION="4.5.1"
         '
         printf "${red}" "\nError: "
         printf "OpenCV version not defined!\n"

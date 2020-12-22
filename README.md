@@ -258,7 +258,7 @@ brew install ffmpeg
     ```bash
     # export OPENCV_VERSION="4.X.X"
     # export OPENCV_VERSION="3.4.X"
-    export OPENCV_VERSION="4.5.0"
+    export OPENCV_VERSION="4.5.1"
     ```
 
 2. Easy install using mac-dev-setup:
@@ -293,6 +293,6 @@ The source code is licensed under the [MIT license](LICENSE.md).
 
 The content of this project itself is licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0).
 
-[release-doc-shield]: https://img.shields.io/badge/Doc-06--Nov--2020-blue
+[release-doc-shield]: https://img.shields.io/badge/Doc-22--Dec--2020-blue
 [release-install-shield]: https://img.shields.io/badge/dynamic/json?color=blue&label=Release&prefix=install-&query=$.release&url=https://raw.githubusercontent.com/mgomesborges/dev-setup/master/package.json
 [license-shield]: https://img.shields.io/github/license/mgomesborges/mac-dev-setup.svg
