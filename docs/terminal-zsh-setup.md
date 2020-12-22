@@ -252,6 +252,7 @@ brew install exa
         kubectl
         zsh-completions
         zsh-syntax-highlighting
+        colored-man-pages
     )
 
     # Reload for zsh-completions
@@ -263,7 +264,7 @@ brew install exa
 
     # exa is a replacement for ls https://github.com/ogham/exa
     if command -v exa 1>/dev/null 2>&1; then
-        alias ls="exa --group-directories-first --classify"
+        alias ls="exa --icons --group-directories-first --classify"
     fi
 
     # Python virtual environment

@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="1.1.4"
+VERSION="1.1.5"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -198,7 +198,7 @@ fi
 
 # exa is a replacement for ls https://github.com/ogham/exa
 if command -v exa 1>/dev/null 2>&1; then
-    alias ls="exa --group-directories-first --classify"
+    alias ls="exa --icons --group-directories-first --classify"
 fi
 
 # Python virtual environment
@@ -394,6 +394,7 @@ plugins=(
     kubectl
     zsh-completions
     zsh-syntax-highlighting
+    colored-man-pages
 )
 
 # Reload for zsh-completions
