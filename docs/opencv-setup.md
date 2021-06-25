@@ -4,8 +4,6 @@
 
 [OpenCV](https://opencv.org) (Open Source Computer Vision Library) is an open source computer vision and machine learning software library.
 
-To keep compatibility, use [Python 3.7.6](#install-python).
-
 ## UPGRADE OpenCV
 
 1. Uninstall old version:
@@ -34,16 +32,14 @@ To keep compatibility, use [Python 3.7.6](#install-python).
 
 3. Install OpenCV following the instructions below!
 
-## Install OpenCV with Python and Qt support
+## Install OpenCV with Python and Qt 5 support
 
 1. Choose the version. Paste that in the terminal prompt:
 
     ```bash
-    # export OPENCV_VERSION="4.3.0"
-    # export OPENCV_VERSION="4.2.0"
-    # export OPENCV_VERSION="4.1.2"
-    # export OPENCV_VERSION="3.4.10"
-    export OPENCV_VERSION="4.3.0"
+    # export OPENCV_VERSION="4.X.X"
+    # export OPENCV_VERSION="3.4.X"
+    export OPENCV_VERSION="4.5.2"
     ```
 
 2. Easy install using mac-dev-setup:
@@ -56,16 +52,16 @@ To keep compatibility, use [Python 3.7.6](#install-python).
 
     ```bash
     # Installing Opencv dependencies
-    brew install cmake pkg-config ceres-solver eigen ffmpeg glog \
-                 harfbuzz jpeg libpng libtiff openexr tbb
+    brew install cmake pkg-config ceres-solver gdal eigen glog \
+                 harfbuzz jpeg libpng libtiff openexr tbb \
+                 ffmpeg gstreamer gst-plugins-base gst-plugins-good
     ```
 
     ```bash
-    # Create a Python virtual environment with NumPy 1.18.1
-    pyenv shell 3.7.6
+    pyenv shell 3.8.10
     mkvirtualenv opencv
     pip install --upgrade pip
-    pip install numpy==1.18.1
+    pip install numpy
     ```
 
     ```bash
@@ -101,7 +97,7 @@ To keep compatibility, use [Python 3.7.6](#install-python).
     QT_QMAKE=$(echo ${HOME}/Qt*/*/clang_64/bin/qmake)
 
     # Check Python PATH
-    pyenv shell 3.7.6
+    pyenv shell 3.8.10
     workon opencv
     py3_exec=$(which python)
     py3_config=$(python -c "from distutils.sysconfig import get_config_var as s; print(s('LIBDIR'))")
@@ -113,7 +109,7 @@ To keep compatibility, use [Python 3.7.6](#install-python).
     ```bash
     # Configure OpenCV via CMake
     cd "${HOME}/opencv/build"
-    pyenv shell 3.7.6
+    pyenv shell 3.8.10
     workon opencv
 
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
@@ -125,6 +121,7 @@ To keep compatibility, use [Python 3.7.6](#install-python).
           -D WITH_QT="${QT_ON_OFF}" \
           -D CMAKE_PREFIX_PATH="${QT_LIB}" \
           -D QT_QMAKE_EXECUTABLE="${QT_QMAKE}" \
+          -D QT5_DIR="${QT_LIB}/Qt5" \
           -D QT5Core_DIR="${QT_LIB}/Qt5Core" \
           -D QT5Gui_DIR="${QT_LIB}/Qt5Gui" \
           -D QT5Test_DIR="${QT_LIB}/Qt5Test" \
@@ -157,7 +154,7 @@ To keep compatibility, use [Python 3.7.6](#install-python).
     ```bash
     # make opencv
     cd "${HOME}/opencv/build"
-    pyenv shell 3.7.6
+    pyenv shell 3.8.10
     workon opencv
 
     make -j 4

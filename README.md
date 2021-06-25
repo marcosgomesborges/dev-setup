@@ -179,7 +179,16 @@ Make sure to visit it at [Microsoft/vscode-recipes](https://github.com/Microsoft
 
 [MacTeX](https://tug.org/mactex/mactex-download.html) is an install package which installs everything needed to run TeX on Mac OS X.
 
-### Install LaTeX
+### Uninstall old version
+
+It is easy to remove most software installed by MacTeX:
+
+```bash
+# Remove MacTeX 2020
+sudo rm -rf /usr/local/texlive/2020
+```
+
+### Install LaTeX 2021
 
 1. Install Ghostscript
 
@@ -187,7 +196,7 @@ Make sure to visit it at [Microsoft/vscode-recipes](https://github.com/Microsoft
     brew install ghostscript
     ```
 
-2. Download MacTeX 2020 from <https://tug.org/mactex/mactex-download.html>
+2. Download MacTeX 2021 from <https://tug.org/mactex/mactex-download.html>
 
 3. Double click on the downloaded file to install
 4. Several pages of information will be displayed
@@ -218,7 +227,7 @@ Make sure to visit it at [Microsoft/vscode-recipes](https://github.com/Microsoft
 7. On the Qt Creator User Experience Development window, make your choice and click `Continue`
 8. Click `Continue` on the Installation Folder window
 9. Select the latest Qt version prebuilt components:
-   * [x] `Qt 5.15.0` / `macOS`
+   * [x] `Qt 6.1.0` / `macOS`
    * [x] `Developer and Designer Tools` / `Qt Installer Framework 3.2`
 10. Then click `Next` and `Install`
 
@@ -285,14 +294,12 @@ brew install ffmpeg
 
 ### Install OpenCV with Python and Qt support
 
-:warning: To keep compatibility, use [Python 3.7.6](#install-python).
-
 1. Choose the version. Paste that in the terminal prompt:
 
     ```bash
     # export OPENCV_VERSION="4.X.X"
     # export OPENCV_VERSION="3.4.X"
-    export OPENCV_VERSION="4.5.1"
+    export OPENCV_VERSION="4.5.2"
     ```
 
 2. Easy install using mac-dev-setup:

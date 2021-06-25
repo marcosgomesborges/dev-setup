@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="1.4.0"
+VERSION="1.5.0"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -26,7 +26,7 @@ cat <<EOF
     bash            Update and set up Bash as the default shell
     bashconfig      Improve Bash
     zsh             Setup Oh My Zsh + Powerlevel9k + Nerd font
-    python376       Install Pyenv and Python 3.7.6
+    python38        Install Pyenv and Python 3.8.10
     pypackages      Install Python packages for data science
     vscode          Set up VS Code and install extensions
     opencv          Install OpenCV with Python and Qt support
@@ -714,7 +714,7 @@ devsetup_install_opencv() {
         printf "${magenta}" "Choose a version using the command below:"
         printf '
             export OPENCV_VERSION="3.4.13"
-            export OPENCV_VERSION="4.5.1"
+            export OPENCV_VERSION="4.5.2"
         '
         printf "${red}" "\nError: "
         printf "OpenCV version not defined!\n"
@@ -727,18 +727,19 @@ devsetup_install_opencv() {
     homebrew_update
 
     printf "${magenta}" "Installing Opencv dependencies\n"
-    brew install cmake pkg-config ceres-solver eigen ffmpeg glog \
-                harfbuzz jpeg libpng libtiff openexr tbb || true
+    brew install cmake pkg-config ceres-solver gdal eigen glog \
+                 harfbuzz jpeg libpng libtiff openexr tbb \
+                 ffmpeg gstreamer gst-plugins-base gst-plugins-good || true
 
     printf "${magenta}" "Create a Python virtual environment with NumPy 1.18.1\n"
     set +u
     eval "$(pyenv init -)"
-    pyenv global 3.7.6
+    pyenv global 3.8.10
     pyenv virtualenvwrapper
     mkvirtualenv opencv || true
     set -u
     pip install --upgrade pip
-    pip install numpy==1.18.1
+    pip install numpy
 
     printf "${magenta}" "Clone OpenCV project from GitHub\n"
     git clone https://github.com/opencv/opencv "${HOME}/opencv"
@@ -789,6 +790,7 @@ devsetup_install_opencv() {
         -D WITH_QT="${QT_ON_OFF}" \
         -D CMAKE_PREFIX_PATH="${QT_LIB}" \
         -D QT_QMAKE_EXECUTABLE="${QT_QMAKE}" \
+        -D QT5_DIR="${QT_LIB}/Qt5" \
         -D QT5Core_DIR="${QT_LIB}/Qt5Core" \
         -D QT5Gui_DIR="${QT_LIB}/Qt5Gui" \
         -D QT5Test_DIR="${QT_LIB}/Qt5Test" \
@@ -881,7 +883,7 @@ while [[ "${#}" -gt 0 ]]; do
             devsetup_install_zsh
             exit 0
             ;;
-        python376)
+        python38)
             devsetup_install_python38
             exit 0
             ;;
