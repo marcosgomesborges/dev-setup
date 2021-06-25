@@ -224,6 +224,10 @@ brew install exa
         command-not-found
     )
 
+    # Fix slowness of copy & paste with zsh-syntax-highlighting
+    # https://gist.github.com/magicdude4eva/2d4748f8ef3e6bf7b1591964c201c1ab
+    zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
     # Update ZSH settings
     source $ZSH/oh-my-zsh.sh
 
