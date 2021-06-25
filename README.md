@@ -122,14 +122,14 @@ Check out how to select your shell and set up your terminal theme:
 [Python](https://www.python.org) is a programming language that lets you work quickly
 and integrate systems more effectively.
 
-### Install Pyenv and Python 3.7.6
+### Install Pyenv and Python 3.8.10
 
 [Pyenv](https://github.com/pyenv/pyenv) lets you easily switch between multiple versions of Python.
 
 * Paste that in the terminal prompt:
 
     ```bash
-    bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) python376
+    bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/install) python38
     ```
 
 * Or follow the [Python set-up guide](./docs/python-setup.md).

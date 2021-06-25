@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="1.2.0"
+VERSION="1.3.0"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -467,8 +467,8 @@ devsetup_install_zsh() {
     printf "${red}" "\nClose and reopen the Terminal!\n"
 }
 
-devsetup_install_python376() {
-    printf "${magenta}" "Install Pyenv and Python 3.7.6\n"
+devsetup_install_python38() {
+    printf "${magenta}" "Install Pyenv and Python 3.8.10\n"
 
     homebrew_update
 
@@ -476,12 +476,12 @@ devsetup_install_python376() {
     brew install pyenv
     brew install pyenv-virtualenvwrapper
 
-    printf "${magenta}" "Install Python 3.7.6\n"
+    printf "${magenta}" "Install Python 3.8.10\n"
     eval "$(pyenv init -)"
-    PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.7.6
+    PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.8.10
 
-    printf "${magenta}" "Set Python 3.7.6 as default\n"
-    pyenv global 3.7.6
+    printf "${magenta}" "Set Python 3.8.10 as default\n"
+    pyenv global 3.8.10
     pyenv virtualenvwrapper
 
     printf "${green}" "\nPython installation successful!\n"
@@ -888,7 +888,7 @@ while [[ "${#}" -gt 0 ]]; do
             exit 0
             ;;
         python376)
-            devsetup_install_python376
+            devsetup_install_python38
             exit 0
             ;;
         pypackages)

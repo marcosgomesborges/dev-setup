@@ -5,7 +5,7 @@
 [Python](https://www.python.org) is a programming language that lets you work quickly
 and integrate systems more effectively.
 
-## Install Pyenv and Python 3.7.6
+## Install Pyenv and Python 3.8.10
 
 [Pyenv](https://github.com/pyenv/pyenv) lets you easily switch between multiple versions of Python.
 
@@ -44,11 +44,8 @@ and integrate systems more effectively.
   5. Install the Python versions you want using the example below:
 
       ```bash
-      # Python 3.7.6
-      PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.7.6
-
-      # Python 3.8.1
-      PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.8.1
+      # Python 3.8.10
+      PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.8.10
       ```
 
 ## Set the Python version you want as default
@@ -56,7 +53,7 @@ and integrate systems more effectively.
 1. Set the default Python version:
 
     ```bash
-    pyenv global 3.7.6
+    pyenv global 3.8.10
     ```
 
 2. Set up the virtualenvwrapper:
