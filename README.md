@@ -10,6 +10,14 @@ A macOS development environment setup guide and command-line tool.
 
 The Command Line Tools Package is a small self-contained package available for download separately from Xcode and that allows you to do command line development in macOS.
 
+### If you are upgrading
+
+1. Remove old version of the Command Line Tools:
+
+    ```bash
+    sudo rm -rf /Library/Developer/CommandLineTools
+    ```
+
 ### Install Command Line Tools
 
 1. Paste that in the terminal prompt:
@@ -38,7 +46,7 @@ The Command Line Tools Package is a small self-contained package available for d
 
 Download and install Xcode from the [App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12) or from [Apple's website](https://developer.apple.com/xcode/)
 
-:warning: Xcode takes over 13 GB of disk space. Its installation is not mandatory.
+:warning: Xcode takes over 13 GB of disk space! Its installation is optional.
 
 ## Homebrew (mandatory)
 
@@ -46,13 +54,39 @@ Download and install Xcode from the [App Store](https://apps.apple.com/us/app/xc
 
 [Homebrew](https://brew.sh) is the missing package manager for macOS.
 
-### Install Homebrewv
+### Install Homebrew
 
 Open the terminal and run the following script:
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
+
+### Or upgrade Homebrew
+
+1. First update the formulae and Homebrew itself:
+
+    ```bash
+    brew update
+    ```
+
+2. You can find out what is outdated with:
+
+    ```bash
+    brew outdated
+    ```
+
+3. Upgrade a specific formula with:
+
+    ```bash
+    brew upgrade <formula>
+    ```
+
+4. Or upgrade everything with:
+
+    ```bash
+    brew upgrade
+    ```
 
 ## Git (mandatory)
 
@@ -293,6 +327,6 @@ The source code is licensed under the [MIT license](LICENSE.md).
 
 The content of this project itself is licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0).
 
-[release-doc-shield]: https://img.shields.io/badge/Doc-22--Dec--2020-blue
+[release-doc-shield]: https://img.shields.io/badge/Doc-25--Jun--2021-blue
 [release-install-shield]: https://img.shields.io/badge/dynamic/json?color=blue&label=Release&prefix=install-&query=$.release&url=https://raw.githubusercontent.com/mgomesborges/dev-setup/master/package.json
 [license-shield]: https://img.shields.io/github/license/mgomesborges/mac-dev-setup.svg

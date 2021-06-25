@@ -34,7 +34,7 @@ bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/in
     if $(grep -Fxq "/usr/local/bin/zsh" /etc/shells); then
         echo "The list of shells is already updated"
     else
-        sudo echo "/usr/local/bin/zsh" >> /etc/shells
+        echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
     fi
     ```
 
