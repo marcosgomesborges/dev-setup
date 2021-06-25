@@ -49,7 +49,7 @@ bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/in
     ```bash
     zsh --version
 
-    # zsh 5.7.1 (x86_64-apple-darwin18.2.0)
+    # zsh 5.8 (x86_64-apple-darwin20.1.0)
     ```
 
 ## Install Oh My Zsh
@@ -57,13 +57,13 @@ bash <(curl -fsSL raw.githubusercontent.com/mgomesborges/mac-dev-setup/master/in
 [Oh My Zsh](https://ohmyz.sh/) is an open source, community-driven framework for managing your zsh configuration.
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 You can upgrade it to get the latest features it offers:
 
 ```bash
-upgrade_oh_my_zsh
+omz update
 ```
 
 ## Install Fonts
@@ -81,30 +81,30 @@ To install the fonts, use Homebrew Cask Fonts:
 2. Install Nerd Font:
 
     ```bash
-    brew cask install font-hack-nerd-font
+    brew install font-hack-nerd-font
     ```
 
-## Install Powerlevel9k theme
+## Install Powerlevel10k theme
 
-[Powerlevel9k](https://github.com/Powerlevel9k/powerlevel9k) is the most awesome Powerline theme for ZSH around!
+[Powerlevel10k](https://github.com/romkatv/powerlevel10k) is the most awesome Powerline theme for ZSH around!
 
 Run on the terminal:
 
 ```bash
-URL="https://github.com/bhilburn/powerlevel9k.git"
-DIR="${HOME}/.oh-my-zsh/custom/themes/powerlevel9k"
+URL="https://github.com/romkatv/powerlevel10k.git"
+DIR="${HOME}/.oh-my-zsh/custom/themes/powerlevel10k"
 git clone "${URL}" "${DIR}"
 ```
 
 ## Install Plugins
 
-### Install zsh-completions
+### Install zsh-autosuggestions
 
 Clone the repository inside your oh-my-zsh repo:
 
 ```bash
-URL="https://github.com/zsh-users/zsh-completions"
-DIR="${ZSH_CUSTOM:=${HOME}/.oh-my-zsh/custom}/plugins/zsh-completions"
+URL="https://github.com/zsh-users/zsh-autosuggestions"
+DIR="${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 git clone "${URL}" "${DIR}"
 ```
 
@@ -142,83 +142,56 @@ brew install exa
 
     ```bash
     read -r -d '' ZSH_PROFILE <<"EOF"
-    #!/bin/bash
     # Zsh Profile for macOS
     # Copyright (c) Marcos Gomes-Borges
     # https://github.com/mgomesborges/mac-dev-setup
 
-    # POWERLEVEL THEME SETTINGS
+    # Homebrew
+    export PATH="/usr/local/sbin:$PATH"
+
+    # POWERLEVEL 10K THEME SETTINGS
     ############################################################
-    # Must have a nerd font installed
     POWERLEVEL9K_MODE="nerdfont-complete"
 
-    # POWERLEVEL9K_COLOR_SCHEME="dark"
-    POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-    POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-    POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%# "
+    # Current directory
+    POWERLEVEL9K_DIR_FOREGROUND=254
+    POWERLEVEL9K_DIR_BACKGROUND=237
 
-    POWERLEVEL9K_ALWAYS_SHOW_USER=true
-    POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
-    POWERLEVEL9K_CONTEXT_TEMPLATE="mgomesborges" # "%n@%m"
-
-    POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="white"
-    POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="black"
-
-    # Long paths truncation strategy
-    POWERLEVEL9K_SHORTEN_STRATEGY=""
-    POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-
-    # Dir home foreground and background
-    POWERLEVEL9K_HOME_ICON=""
-    POWERLEVEL9K_HOME_SUB_ICON=""
-    POWERLEVEL9K_FOLDER_ICON=""
-    POWERLEVEL9K_ETC_ICON=""
-
-    POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="025"
-    POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
-    POWERLEVEL9K_DIR_HOME_BACKGROUND="025"
-    POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
-    POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="025"
-    POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
-
-    # Displays a lock icon if you do not have write permissions on the folder
-    POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="white"
-    POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
+    # OS identifier color
+    POWERLEVEL9K_OS_ICON_FOREGROUND=232
+    POWERLEVEL9K_OS_ICON_BACKGROUND=7
 
     # Time
+    POWERLEVEL9K_TIME_FOREGROUND=0
+    POWERLEVEL9K_TIME_BACKGROUND=7
     POWERLEVEL9K_TIME_FORMAT="%D{%d/%m %H:%M:%S}"
 
     # Current Python virtual environment
-    POWERLEVEL9K_VIRTUALENV_BACKGROUND="220"
-    POWERLEVEL9K_VIRTUALENV_FOREGROUND="black"
+    POWERLEVEL9K_VIRTUALENV_FOREGROUND=0
+    POWERLEVEL9K_VIRTUALENV_BACKGROUND=220
 
-    # Current Python version
-    POWERLEVEL9K_CUSTOM_PYTHON_VERSION="zsh_python_version"
-    POWERLEVEL9K_CUSTOM_PYTHON_VERSION_BACKGROUND="024"
-    POWERLEVEL9K_CUSTOM_PYTHON_VERSION_FOREGROUND="white"
+    # Pyenv
+    POWERLEVEL9K_PYENV_FOREGROUND=255
+    POWERLEVEL9K_PYENV_BACKGROUND=24
 
-    zsh_python_version(){
-        local virtualenv_path="$VIRTUAL_ENV"
-        # Early exit; $virtualenv_path must always be set
-        [[ -z "$virtualenv_path" ]] && return
-        python_version=$(python --version 2>&1)
-        echo ${python_version/"Python"/""}
-    }
-
-    # Prompt elements
     POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-        context
+        os_icon
         dir
-        dir_writable
-        virtualenv
-        custom_python_version
-        rbenv
+        vcs
+        newline
+        prompt_char
     )
     POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+        status
+        command_execution_time
         background_jobs
-        rvm
-        vcs
+        direnv
+        asdf
+        virtualenv
+        pyenv
+        vim_shell
         time
+        newline
     )
 
     # OH MY ZSH SETTINGS
@@ -228,16 +201,9 @@ brew install exa
 
     # ZSH Terminal title
     DISABLE_AUTO_TITLE=true
-    # echo -ne "\e]1;TERMINAL_TITLE\a"
-
-    # Username which by default will not be shown
-    export DEFAULT_USER="$USER"
 
     # Set name of the theme to load
-    ZSH_THEME="powerlevel9k/powerlevel9k"
-
-    # Disable Oh My Zsh automatic update
-    DISABLE_UPDATE_PROMPT="true"
+    ZSH_THEME="powerlevel10k/powerlevel10k"
 
     # Plugins
     plugins=(
@@ -250,13 +216,15 @@ brew install exa
         docker
         docker-compose
         kubectl
-        zsh-completions
+        colorize
+        compleat
+        zsh-autosuggestions
         zsh-syntax-highlighting
         colored-man-pages
+        command-not-found
     )
 
-    # Reload for zsh-completions
-    autoload -U compinit && compinit
+    # Update ZSH settings
     source $ZSH/oh-my-zsh.sh
 
     # User configuration
@@ -277,6 +245,7 @@ brew install exa
 
     # Pyenv Python version management
     if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init --path)"
         eval "$(pyenv init -)"
         pyenv virtualenvwrapper
     fi
@@ -294,7 +263,7 @@ brew install exa
 5. Press the `Default` button near the bottom of the window
 6. Under the `Font` tab change the font:
 
-    * `Hack Regular Nerd Font Complete 14 pt`
+    * `Hack Regular Nerd Font Complete 18 pt`
 
 7. Under the `Text` tab check the boxes:
 
@@ -302,5 +271,7 @@ brew install exa
    * `Use bold fonts`
    * `Display ANSI colors`
    * `Use bright colors for bold text`
+
+8. Update the **ANSI Colours** table: click on the colour, select the colour picker tool and use the colours from the palette below as a reference.
 
 ![Terminal Profiles - Text](../assets/terminal-profiles-text-zsh.png?raw=true)
