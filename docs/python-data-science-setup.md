@@ -15,9 +15,9 @@ brew install Graphviz
 ## Create a Python virtual environment
 
 ```bash
-# Example using Python 3.7.6
-pyenv shell 3.7.6
-mkvirtualenv py376
+# Example using Python 3.8.10
+pyenv shell 3.8.10
+mkvirtualenv py38
 pip install --upgrade pip
 ```
 
@@ -27,7 +27,7 @@ pip install --upgrade pip
 
 ```bash
 # Activate the virtual environment
-workon py376
+workon py38
 
 # Install TensorFlow
 pip install tensorflow
@@ -39,7 +39,7 @@ pip install tensorflow
 
 ```bash
 # Activate the virtual environment
-workon py376
+workon py38
 
 # Install Keras
 pip install h5py pydot keras
@@ -49,7 +49,7 @@ pip install h5py pydot keras
 
 ```bash
 # Activate the virtual environment
-workon py376
+workon py38
 
 # Install libraries
 pip install numpy \
@@ -65,7 +65,7 @@ pip install numpy \
 
 ```bash
 # Activate the virtual environment
-workon py376
+workon py38
 
 # Install libraries
 pip install autopep8 \
@@ -75,14 +75,15 @@ pip install autopep8 \
             pydocstyle \
             pylint \
             pytest \
-            requests
+            requests \
+            markdown
 ```
 
 ## Install Matplotlib
 
 ```bash
 # Activate the virtual environment
-workon py376
+workon py38
 
 # Install Matplotlib
 pip install ipympl matplotlib
@@ -108,26 +109,20 @@ echo "backend : TkAgg" > "${HOME}/.config/matplotlib/matplotlibrc"
 
     ```bash
     # Activate Python environment
-    workon py376
+    workon py38
 
     # Install Jupyterlab
-    pip install jupyterlab jupyterlab-git jupyter-tensorboard jupytext
+    pip install jupyterlab jupyterlab_widgets ipywidgets
     ```
 
 3. Install Jupyter Lab extensions
 
     ```bash
     # Activate Python environment
-    workon py376
+    workon py38
 
     # Install extensions
-    jupyter labextension install @jupyterlab/toc
-    jupyter labextension install @jupyterlab/git
-    jupyter serverextension enable --py jupyterlab_git
-    jupyter labextension install jupyterlab_tensorboard
-    jupyter labextension install jupyterlab-jupytext
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager
-    jupyter labextension install jupyter-matplotlib
+    pip install tensorboard jupyter-tensorboard jupytext
 
     # Check extensions status
     jupyter labextension list

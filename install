@@ -4,7 +4,7 @@
 #
 # Copyright (c) Marcos Gomes-Borges
 
-VERSION="1.3.0"
+VERSION="1.4.0"
 PREFIX="${HOME}"
 
 red="\033[91m%b\033[39m"
@@ -498,9 +498,9 @@ devsetup_install_pypackages() {
     printf "${magenta}" "Create a Python virtual environment\n"
     set +u
     eval "$(pyenv init -)"
-    pyenv global 3.7.6
+    pyenv global 3.8.10
     pyenv virtualenvwrapper
-    mkvirtualenv py376 || true
+    mkvirtualenv py38 || true
     set -u
     pip install --upgrade pip
 
@@ -527,7 +527,8 @@ devsetup_install_pypackages() {
                 pydocstyle \
                 pylint \
                 pytest \
-                requests
+                requests \
+                markdown
 
     printf "${magenta}" "Install Matplotlib\n"
     pip install ipympl matplotlib
@@ -541,16 +542,9 @@ devsetup_install_pypackages() {
 
     printf "${magenta}" "Install Jupyter Lab\n"
 
-    pip install jupyterlab jupyterlab-git jupyter-tensorboard jupytext
+    pip install jupyterlab jupyterlab_widgets ipywidgets
 
-    printf "${magenta}" "Install Jupyter Lab extensions\n"
-    jupyter labextension install @jupyterlab/toc
-    jupyter labextension install @jupyterlab/git
-    jupyter serverextension enable --py jupyterlab_git
-    jupyter labextension install jupyterlab_tensorboard
-    jupyter labextension install jupyterlab-jupytext
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager
-    jupyter labextension install jupyter-matplotlib
+    pip install tensorboard jupyter-tensorboard jupytext
 
     jupyter labextension list
 
